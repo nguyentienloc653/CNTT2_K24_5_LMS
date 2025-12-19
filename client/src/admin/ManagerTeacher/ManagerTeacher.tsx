@@ -47,7 +47,7 @@ export default function ManagerStudent() {
   };
 
   return (
-    <div className="flex flex-row gap-6 min-h-screen bg-slate-50">
+    <div className="flex flex-row gap-6 min-h-screen bg-orange-50">
       {/* SIDEBAR */}
       <div className="w-64">
         <SideBarManager />

@@ -27,6 +27,7 @@ import { ToastContainer } from "react-toastify";
 // import StudentLayout from "./components/layout/StudentLayout";
 import Sidebar from "./components/training-manager/Sidebar";
 import ClassManager from "./admin/ManagerClasses/ClassManager";
+import ClassDetail from "./admin/ManagerClasses/ClassDetail";
 
 type PageId = "overview" | "scores" | "attendance" | "submission";
 
@@ -90,6 +91,7 @@ export default function App() {
         <Route path="/students/:id" element={<StudentDetail />} />
         <Route path="/teachers" element={<ManagerTeacher />} />
         <Route path="/classes" element={<ClassManager />} />
+        <Route path="/classes/:id" element={<ClassDetail/>}/>
         <Route path="/statistic" element={<Statisic />} />
       </Routes>
     </BrowserRouter>

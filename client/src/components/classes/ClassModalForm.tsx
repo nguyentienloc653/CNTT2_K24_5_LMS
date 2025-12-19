@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { addClass, updateClass } from "../../redux/slices/classesSlice";
-import { useAppDispatch } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import type { Class, ClassForm } from "../../redux/types/class";
 import { toast } from "react-toastify";
 
@@ -14,10 +14,6 @@ type Props = {
 const emptyForm: ClassForm = {
   classCode: "",
   name: "",
-  grade: 1,
-  homeroomTeacherId: undefined,
-  studentIds: [],
-  teacherIds: [],
   status: "active",
 };
 
@@ -27,25 +23,62 @@ export default function ClassModalForm({
   classData,
   onClose,
 }: Props) {
-  const dispatch = useAppDispatch();
   const [form, setForm] = useState<ClassForm>(emptyForm);
+
+  const dispatch = useAppDispatch();
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  //   const teachers = useAppSelector((state) => state.teachers.list);
+  const classes = useAppSelector((state) => state.classes.list);
 
   useEffect(() => {
     if (!open) return;
 
     if (mode === "edit" && classData) {
-      const { id, ...rest } = classData;
-      setForm(rest);
-    } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setForm({
+        classCode: classData.classCode,
+        name: classData.name,
+        status: classData.status,
+      });
+    }
+
+    if (mode === "add") {
       setForm(emptyForm);
     }
+
+    setErrors({});
   }, [open, mode, classData]);
 
+  // ================= VALIDATE =================
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!form.classCode.trim()) {
+      newErrors.classCode = "Mã lớp bắt buộc";
+    } else if (
+      mode === "add" &&
+      classes.some((s) => s.classCode === form.classCode)
+    ) {
+      newErrors.classCode = "Mã lớp đã tồn tại";
+    }
+
+    if (!form.name.trim()) {
+      newErrors.name = "Tên lớp bắt buộc";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  if (!open) return null;
+
   const handleSubmit = async () => {
+    if (!validate()) return;
+
     try {
       if (mode === "add") {
         await dispatch(addClass(form)).unwrap();
-        toast.success("Thêm lớp thành công");
+        toast.success("Thêm giảng viên thành công");
       } else {
         await dispatch(
           updateClass({
@@ -71,33 +104,36 @@ export default function ClassModalForm({
         </h2>
 
         <div className="grid grid-cols-2 gap-3">
-          <input
-            className="border p-2 rounded"
-            placeholder="Mã lớp"
-            value={form.classCode}
-            onChange={(e) =>
-              setForm({ ...form, classCode: e.target.value })
-            }
-          />
+          <div>
+            <input
+              className={`border p-2 rounded w-full ${
+                errors.classCode ? "border-red-500" : ""
+              }`}
+              placeholder="Mã lớp"
+              value={form.classCode}
+              disabled={mode === "edit"}
+              onChange={(e) => setForm({ ...form, classCode: e.target.value })}
+            />
 
-          <input
-            className="border p-2 rounded"
-            placeholder="Tên lớp"
-            value={form.name}
-            onChange={(e) =>
-              setForm({ ...form, name: e.target.value })
-            }
-          />
+            {errors.classCode && (
+              <p className="text-red-500 text-sm mt-1">{errors.classCode}</p>
+            )}
+          </div>
 
-          <input
-            type="number"
-            className="border p-2 rounded"
-            placeholder="Khối"
-            value={form.grade}
-            onChange={(e) =>
-              setForm({ ...form, grade: Number(e.target.value) })
-            }
-          />
+          <div>
+            <input
+              className={`border p-2 rounded w-full ${
+                errors.name ? "border-red-500" : ""
+              }`}
+              placeholder="Tên lớp"
+              value={form.name}
+              onChange={(e) => setForm({ ...form, name: e.target.value })}
+            />
+
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+            )}
+          </div>
 
           <select
             className="border p-2 rounded"

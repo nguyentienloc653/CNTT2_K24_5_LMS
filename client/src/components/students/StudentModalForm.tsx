@@ -15,10 +15,11 @@ const emptyForm: StudentForm = {
   studentCode: "",
   name: "",
   birthday: "",
-  classId: 0,
+  classId: "",
   gender: "Nam",
   address: "",
   email: "",
+  subject: "",
 };
 
 export default function StudentModalForm({
@@ -43,10 +44,11 @@ export default function StudentModalForm({
         studentCode: student.studentCode,
         name: student.name,
         birthday: student.birthday,
-        classId: student.classId,
+        classId: String(student.classId),
         gender: student.gender,
         address: student.address,
         email: student.email,
+        subject: student.subject,
       });
     }
 
@@ -96,6 +98,10 @@ export default function StudentModalForm({
       newErrors.email = "Email bắt buộc";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
       newErrors.email = "Email không đúng định dạng";
+    }
+
+    if (!form.subject.trim()) {
+      newErrors.subject = "Môn học bắt buộc";
     }
 
     setErrors(newErrors);
@@ -184,7 +190,10 @@ export default function StudentModalForm({
             <select
               value={form.classId}
               onChange={(e) =>
-                setForm({ ...form, classId: Number(e.target.value) })
+                setForm({
+                  ...form,
+                  classId: e.target.value === "" ? "" : String(e.target.value),
+                })
               }
               className={inputClass}
             >
@@ -195,6 +204,7 @@ export default function StudentModalForm({
                 </option>
               ))}
             </select>
+
             {errors.className && (
               <p className={errorClass}>{errors.className}</p>
             )}
@@ -209,6 +219,17 @@ export default function StudentModalForm({
               className={inputClass}
             />
             {errors.address && <p className={errorClass}>{errors.address}</p>}
+          </div>
+
+          {/* Môn học */}
+          <div>
+            <input
+              value={form.subject}
+              onChange={(e) => setForm({ ...form, subject: e.target.value })}
+              placeholder="Môn học"
+              className={inputClass}
+            />
+            {errors.subject && <p className={errorClass}>{errors.subject}</p>}
           </div>
 
           {/* Giới tính */}

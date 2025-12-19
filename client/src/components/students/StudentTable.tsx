@@ -5,6 +5,8 @@ import editIcon from "../../assets/icon/edit.png";
 import trashIcon from "../../assets/icon/trash.png";
 import type { Student } from "../../redux/types/student";
 import { fetchClasses } from "../../redux/slices/classesSlice";
+import { useNavigate } from "react-router-dom";
+import eyeIcon from "../../assets/icon/eye.png";
 type Props = {
   onEdit: (student: Student) => void;
   onDelete: (student: Student) => void;
@@ -12,11 +14,12 @@ type Props = {
 
 export function StudentTable({ onEdit, onDelete }: Props) {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const { list, loading } = useAppSelector((state) => state.students);
   const classes = useAppSelector((state) => state.classes.list);
 
-  const getClassName = (classId: number) =>
-    classes.find((c) => Number(c.id) === classId)?.name || "—";
+  const getClassName = (classId: string) =>
+    classes.find((c) => String(c.id) === classId)?.name || "—";
 
   useEffect(() => {
     dispatch(fetchStudents());
@@ -45,15 +48,12 @@ export function StudentTable({ onEdit, onDelete }: Props) {
               <td className="p-2">{item.studentCode}</td>
               <td className="p-2">{item.name}</td>
               <td className="p-2">{item.birthday}</td>
-              <td className="p-2">{getClassName(item?.classId)}</td>
+              <td className="p-2">{getClassName(String(item?.classId))}</td>
 
               <td className="p-2">
-                <a
-                  href={`/students/${item.id}`}
-                  className="text-blue-500 hover:underline"
-                >
-                  Detail
-                </a>
+                <button onClick={() => navigate(`/students/${item.id}`)}>
+                  <img src={eyeIcon} className="w-5" />
+                </button>
               </td>
 
               <td className="p-2 text-center flex gap-2 justify-center">

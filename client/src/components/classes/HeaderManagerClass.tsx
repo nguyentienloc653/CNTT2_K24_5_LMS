@@ -7,7 +7,7 @@ export default function HeaderManagerClass({onAdd}: Props) {
     <div className="flex items-center justify-between px-6 py-4 border-b">
       <div>
         <h1 className="text-2xl font-bold">Classes</h1>
-        <p className="text-sm text-gray-500">Manager classes</p>
+        <p className="text-sm text-gray-500">Manager your classes</p>
       </div>
 
       <div className="flex items-center gap-5">

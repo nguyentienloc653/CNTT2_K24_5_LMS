@@ -1,12 +1,24 @@
-import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../redux/hook";
+import { useNavigate, useParams } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useEffect } from "react";
+import { fetchStudents } from "../../redux/slices/studentSlice";
+import { fetchClasses } from "../../redux/slices/classesSlice";
+import { fetchTeachers } from "../../redux/slices/teacherSlice";
 
 export default function StudentDetail() {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-  const students = useAppSelector((state) => state.students.list);
+  const { list: students, loading } = useAppSelector((state) => state.students);
   const classes = useAppSelector((state) => state.classes.list);
   const teachers = useAppSelector((state) => state.teachers.list);
+
+  useEffect(() => {
+    dispatch(fetchStudents());
+    dispatch(fetchClasses());
+    dispatch(fetchTeachers());
+  }, [dispatch]);
 
   const student = students.find((s) => s.id === Number(id));
 
@@ -14,17 +26,17 @@ export default function StudentDetail() {
     return <div className="p-8 text-red-500">Không tìm thấy sinh viên</div>;
   }
 
-  const studentClasses = classes.filter((c) =>
-    c.studentIds.includes(student.id)
+  const studentClass = classes.find((c) => c.id === student.classId);
+
+  const classTeachers = teachers.filter((t) =>
+    t.classIds.includes(student.classId)
   );
 
-  const teacherIds = studentClasses.flatMap((c) => c.teacherIds);
+  const subjects = Array.from(new Set(classTeachers.map((t) => t.subject)));
 
-  const subjects = Array.from(
-    new Set(
-      teachers.filter((t) => teacherIds.includes(t.id)).map((t) => t.subject)
-    )
-  );
+  if (loading) {
+    return <div className="p-8">Đang tải dữ liệu...</div>;
+  }
 
   return (
     <div className="p-8 min-h-screen bg-gray-50">
@@ -35,12 +47,12 @@ export default function StudentDetail() {
           <p className="text-gray-500">More information about the student</p>
         </div>
 
-        <a
-          href="/students"
-          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg text-gray-700"
+        <button
+          onClick={() => navigate("/students")}
+          className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded-lg"
         >
           ← Back to List
-        </a>
+        </button>
       </div>
 
       {/* Main Card */}
@@ -55,21 +67,6 @@ export default function StudentDetail() {
           <div>
             <h2 className="text-2xl font-bold text-gray-800">{student.name}</h2>
             <p className="text-gray-500">Student Code: {student.studentCode}</p>
-
-            <div className="flex flex-wrap gap-2 mt-3">
-              {studentClasses.length > 0 ? (
-                studentClasses.map((c) => (
-                  <span
-                    key={c.id}
-                    className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm"
-                  >
-                    {c.name}
-                  </span>
-                ))
-              ) : (
-                <span className="text-gray-400">-</span>
-              )}
-            </div>
           </div>
         </div>
 
@@ -89,10 +86,16 @@ export default function StudentDetail() {
         </h2>
 
         <div className="bg-white p-6 rounded-xl shadow space-y-3">
-          <p>
-            <b>Lớp học:</b>{" "}
-            {studentClasses.map((c) => c.name).join(", ") || "-"}
-          </p>
+          <b>Lớp học:</b>
+          <div className="flex flex-wrap gap-2 mt-3">
+            {studentClass ? (
+              <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-full text-sm">
+                {studentClass.name}
+              </span>
+            ) : (
+              <span className="text-gray-400">Chưa có lớp</span>
+            )}
+          </div>
 
           <div>
             <b>Môn học:</b>

@@ -7,7 +7,17 @@ export interface Student {
   gender: "Nam" | "Nữ";
   address: string;
   email: string;
+  subject: string;
 }
 
 // Dùng cho form (không có id)
-export type StudentForm = Omit<Student, "id">;
+export type StudentForm = {
+  studentCode: string;
+  name: string;
+  birthday: string;
+  classId: string;
+  gender: "Nam" | "Nữ";
+  address: string;
+  email: string;
+  subject: string;
+};
