@@ -1,0 +1,354 @@
+.submission-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.submit-btn {
+  width: 160px;
+  height: 48px;
+  background: #a50914;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.submit-btn:hover {
+  background: #8a0710;
+}
+
+.submit-btn-icon {
+  font-size: 18px;
+  margin-top: -1px;
+}
+
+.submission-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;                         
+  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.06);
+  width: 100%;
+}
+
+.submission-table-wrapper {
+  overflow: visible;
+  max-height: none;
+}
+
+.submission-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+}
+
+.submission-table thead tr {
+  background: #ffecef;                     
+}
+
+.submission-table thead th {
+  height: 44px;
+  padding: 12px 24px;
+  font-weight: 600;
+  font-size: 18px;
+  color: #AB1F24;
+  text-align: left;
+  border-bottom: 1px solid #f3cfd6;
+  white-space: nowrap;
+  position: relative;                      
+}
+
+.submission-table thead th:first-child,
+.submission-table tbody td:first-child {
+  text-align: center;
+}
+
+.submission-table thead th:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 24px;
+  background: #ffd5dd;
+}
+
+.submission-table tbody tr {
+  background: #ffffff;
+}
+
+.submission-table tbody td {
+  height: 52px;
+  padding: 14px 24px;
+  border-bottom: 1px solid #f3f4f6;
+  color: #111827;
+  font-size: 16px;
+}
+
+.submission-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.submission-subject {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.submission-link {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.submission-edit-header,
+.submission-actions {
+  text-align: center;
+}
+
+.icon-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0 3px;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+
+.icon-btn img {
+  width: 24px;
+  height: 24px;
+}
+
+.icon-btn.edit:hover {
+  background: rgba(46, 204, 113, 0.12);
+  transform: translateY(-1px);
+}
+
+.icon-btn.delete:hover {
+  background: rgba(231, 76, 60, 0.12);
+  transform: translateY(-1px);
+}
+
+.submission-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9fafb;                  
+  padding: 12px 24px 14px;
+  border-top: 1px solid #f3f4f6;
+  font-size: 13px;
+}
+
+.pager-nav {
+  border: none;
+  background: transparent;
+  color: #9ca3af;
+  cursor: pointer;
+}
+
+.pager-nav.disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.pager-pages {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pager-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #6b7280;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.pager-dot.active {
+  background: #ffecef;
+  color: #AB1F24;
+  font-weight: 600;
+}
+
+.pager-ellipsis {
+  color: #babfc7;
+  font-size: 14px;
+}
+
+/* ================== MODAL NỘP BÀI ================== */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.40);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-card {
+  width: 720px;
+  max-width: 90vw;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 24px 32px 28px;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.35);
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.modal-divider {
+  height: 1px;
+  background: #f3f4f6;
+  margin-bottom: 20px;
+}
+
+/* field */
+.modal-field {
+  margin-bottom: 18px;
+}
+
+.modal-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* wrapper cho select + input */
+.modal-input-wrapper {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+}
+
+/* select */
+.modal-select {
+  flex: 1;
+  height: 52px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+  appearance: none;
+}
+
+.modal-select-arrow {
+  font-size: 12px;
+  color: #6b7280;
+  margin-left: 8px;
+}
+
+/* input */
+.modal-input {
+  flex: 1;
+  height: 52px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background: transparent;
+}
+
+/* link icon + input */
+.modal-link-wrapper {
+  padding-left: 12px;
+}
+
+.modal-link-icon {
+  font-size: 18px;
+  margin-right: 8px;
+  color: #9ca3af;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.modal-btn-cancel {
+  flex: 1;
+  height: 48px;
+  border-radius: 8px;
+  border: none;
+  background: #f3f4f6;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  cursor: pointer;
+}
+
+.modal-btn-submit {
+  flex: 1;
+}
+
+/* ===== DELETE CONFIRM MODAL (ADD-ON) ===== */
+.delete-modal-content {
+  margin: 12px 0 18px;
+}
+
+.delete-modal-text {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.delete-modal-note {
+  margin: 10px 0 0;
+  font-size: 13px;
+  opacity: 0.75;
+}
+
+/* Nút Xóa (đỏ) */
+.modal-btn-danger {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 10px 100px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #fff;
+  background: #e53935;
+  transition: 0.2s ease;
+}
+
+.modal-btn-danger:hover {
+  filter: brightness(0.95);
+}
+
+.modal-btn-danger:active {
+  transform: translateY(1px);
+}

@@ -1,0 +1,336 @@
+.stt-page {
+  flex: 1;
+  padding: 16px;
+}
+
+.stt-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+.stt-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: #0f172a; 
+}
+
+.stt-subtitle {
+  margin: 6px 0 0;
+  font-size: 13px;
+  color: rgba(15, 23, 42, 0.65);
+}
+
+.stt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.stt-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 190px;
+}
+
+.stt-field label {
+  font-size: 12px;
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.6);
+}
+
+.stt-field input,
+.stt-field select {
+  height: 40px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0; 
+  background: #ffffff;
+  outline: none;
+  font-size: 14px;
+}
+
+.stt-field input:focus,
+.stt-field select:focus {
+  border-color: rgba(15, 23, 42, 0.35);
+}
+
+.stt-btn {
+  height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.stt-btn:hover {
+  border-color: rgba(15, 23, 42, 0.35);
+}
+
+.stt-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(210px, 1fr));
+  gap: 12px;
+  margin: 14px 0 16px;
+}
+
+@media (max-width: 1200px) {
+  .stt-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .stt-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stt-field {
+    min-width: 100%;
+  }
+
+  .stt-actions {
+    justify-content: flex-start;
+  }
+}
+
+.stt-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0; 
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+
+.stt-card.highlight {
+  border-color: rgba(15, 23, 42, 0.35);
+}
+
+.stt-card-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(15, 23, 42, 0.6);
+}
+
+.stt-card-value {
+  margin-top: 8px;
+  font-size: 26px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.stt-card-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.55);
+}
+
+.stt-bar {
+  margin-top: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  overflow: hidden;
+}
+
+.stt-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.35);
+}
+
+.stt-panel {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.stt-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 6px 6px 10px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.stt-panel-title {
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.stt-panel-meta {
+  font-size: 13px;
+  color: rgba(15, 23, 42, 0.6);
+}
+
+.stt-table-wrap {
+  overflow: auto;
+}
+
+.stt-table {
+  width: 100%;
+  min-width: 1000px;
+  border-collapse: collapse;
+}
+
+.stt-table thead th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 800;
+  color: rgba(15, 23, 42, 0.65);
+  padding: 12px 10px;
+  background: #f8fafc; 
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.stt-table tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.stt-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+/* .right {
+  text-align: right;
+} */
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+/* name cell */
+.name-cell .name {
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.name-cell .sub {
+  margin-top: 4px;
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.6);
+}
+
+.empty {
+  text-align: center;
+  padding: 18px 10px !important;
+  color: rgba(15, 23, 42, 0.6);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  font-size: 12px;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.badge-strong {
+  border-color: rgba(15, 23, 42, 0.35);
+  background: #f8fafc;
+}
+
+.stt-footnote {
+  margin-top: 10px;
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.6);
+  padding: 0 2px;
+}
+
+/* ====== SKELETON ====== */
+.stt-skeleton {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(210px, 1fr));
+  gap: 12px;
+  margin: 14px 0 16px;
+}
+
+@media (max-width: 1200px) {
+  .stt-skeleton {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+}
+
+@media (max-width: 720px) {
+  .stt-skeleton {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stt-skel-card,
+.stt-skel-table {
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.04) 0%,
+    rgba(15, 23, 42, 0.08) 50%,
+    rgba(15, 23, 42, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: stt-shimmer 1.2s infinite linear;
+}
+
+.stt-skel-card {
+  height: 110px;
+}
+
+.stt-skel-table {
+  height: 320px;
+}
+
+@keyframes stt-shimmer {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.stt-error {
+  margin-top: 14px;
+  border: 1px solid #fecaca; 
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 14px;
+}
+
+.stt-error-title {
+  font-weight: 900;
+  color: #b91c1c;
+}
+
+.stt-error-text {
+  margin-top: 6px;
+  font-size: 12px;
+  opacity: 0.85;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+.stt-error-hint {
+  margin-top: 8px;
+  font-size: 12px;
+  color: rgba(15, 23, 42, 0.65);
+}

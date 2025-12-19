@@ -1,0 +1,109 @@
+.scores-card {
+  background-color: #f7f7fb;
+  border-radius: 20px;
+  padding: 16px 16px 20px;
+}
+
+.scores-header {
+  background-color: #fef3f2;
+  border-radius: 16px 16px 0 0;
+}
+
+.scores-header .scores-table {
+  border-radius: 16px 16px 0 0;
+}
+
+.scores-body-wrapper {
+  height: 620px;             
+  overflow-y: auto;          
+  background-color: #ffffff;
+  border-radius: 0 0 16px 16px;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.05);
+}
+
+.scores-body-wrapper::-webkit-scrollbar {
+  width: 6px;
+}
+.scores-body-wrapper::-webkit-scrollbar-track {
+  background: transparent;
+}
+.scores-body-wrapper::-webkit-scrollbar-thumb {
+  background: #e4e4ea;
+  border-radius: 999px;
+}
+
+.scores-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 14px;
+}
+
+.scores-header thead tr {
+  background-color: #ffecef;
+}
+
+.scores-header thead th {
+  color: #AB1F24;
+  font-weight: 600;
+  padding: 0;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  font-size: 18px;
+}
+
+.scores-header thead th:nth-child(n + 3):not(:last-child) {
+  border-right: 1px solid #ffd5dd;
+}
+
+.scores-body-wrapper td {
+  height: 48px;            
+  line-height: 48px;
+  padding: 0;              
+  font-size: 14px;
+  color: #222;
+  text-align: center; 
+}
+
+.scores-header th:first-child,
+.scores-body-wrapper td:first-child,
+.scores-header th:last-child,
+.scores-body-wrapper td:last-child {
+  text-align: center;
+}
+
+.scores-body-wrapper td:last-child {
+  font-weight: 600;
+}
+
+.scores-body-wrapper tr:not(:last-child) td {
+  border-bottom: 1px solid #f1f1f5;
+}
+
+.scores-header thead th:nth-child(1) {
+  text-align: center;
+}
+.scores-header thead th:nth-child(2) {
+  text-align: left;
+  padding-left: 16px;
+}
+
+.scores-body-wrapper td:nth-child(1) {
+  width: 94px;
+  text-align: center;
+}
+.scores-body-wrapper td:nth-child(2) {
+  width: 300px;
+  text-align: left;
+  padding-left: 16px;     
+  font-weight: 500;
+}
+.scores-body-wrapper td:nth-child(3),
+.scores-body-wrapper td:nth-child(4),
+.scores-body-wrapper td:nth-child(5),
+.scores-body-wrapper td:nth-child(6) {
+  width: 164.5px;
+  text-align: center;
+  font-weight: 400;
+}
