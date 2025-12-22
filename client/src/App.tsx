@@ -33,6 +33,7 @@ import Sidebar from './components/training-manager/Sidebar';
 import ClassManager from './admin/ManagerClasses/ClassManager';
 import ClassDetail from './admin/ManagerClasses/ClassDetail';
 import QuizApp from './components/question/QuizzApp';
+import CourseManager from './admin/ManagerCourse/CourseManager';
 
 type PageId = 'overview' | 'scores' | 'attendance' | 'submission';
 
@@ -108,6 +109,9 @@ export default function App() {
                 <Route path="/classes/:id" element={<ClassDetail />} />
                 <Route path="/statistic" element={<Statisic />} />
                 <Route path="/question_admin" element={<QuizApp />} />
+                <Route path="/courses" element={<CourseManager />} />
+
+
             </Routes>
         </BrowserRouter>
     );
