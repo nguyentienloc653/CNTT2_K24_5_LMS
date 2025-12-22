@@ -35,7 +35,7 @@ export function StudentTable({ data, onEdit, onDelete }: Props) {
         <thead>
           <tr className="bg-orange-500 text-white text-left">
             <th className="p-2">Mã SV</th>
-            <th className="p-2">Tên</th>
+            <th className="p-2">Tên sinh viên</th>
             <th className="p-2">Ngày sinh</th>
             <th className="p-2">Lớp</th>
             <th className="p-2">View</th>

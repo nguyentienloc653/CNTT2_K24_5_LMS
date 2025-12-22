@@ -3,22 +3,32 @@ import { fetchTeachers } from "../../redux/slices/teacherSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import editIcon from "../../assets/icon/edit.png";
 import trashIcon from "../../assets/icon/trash.png";
+import eyeIcon from "../../assets/icon/eye.png";
 import type { Teacher } from "../../redux/types/teacher";
 import { fetchClasses } from "../../redux/slices/classesSlice";
+import { useNavigate } from "react-router-dom";
 type Props = {
+  data: Teacher[];
   onEdit: (teacher: Teacher) => void;
   onDelete: (teacher: Teacher) => void;
 };
 
-export function TeacherTable({ onEdit, onDelete }: Props) {
+export function TeacherTable({ data, onEdit, onDelete }: Props) {
   const dispatch = useAppDispatch();
-  const { list, loading } = useAppSelector((state) => state.teachers);
+  const { loading } = useAppSelector((state) => state.teachers);
   const classes = useAppSelector((state) => state.classes.list);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchTeachers());
     dispatch(fetchClasses());
   }, [dispatch]);
+
+  const getClassNames = (classIds: number[]) =>
+    classes
+      .filter((c) => classIds.includes(c.id))
+      .map((c) => c.name)
+      .join(", ");
 
   if (loading) return <p>Loading...</p>;
 
@@ -38,16 +48,21 @@ export function TeacherTable({ onEdit, onDelete }: Props) {
         </thead>
 
         <tbody>
-          {list.map((item) => (
+          {data.length === 0 && (
+            <tr>
+              <td colSpan={6} className="p-6 text-center text-gray-400">
+                Không tìm thấy sinh viên
+              </td>
+            </tr>
+          )}
+
+          {data.map((item) => (
             <tr key={item.id} className="border-b hover:bg-gray-50">
               <td className="p-2">{item.teacherCode}</td>
               <td className="p-2">{item.name}</td>
               <td className="p-2">{item.subject}</td>
               <td className="p-2">
-                {classes
-                  .filter((c) => item.classIds?.includes(c.id))
-                  .map((c) => c.name)
-                  .join(", ") || "-"}
+                {getClassNames(item.classIds)}
               </td>
 
               <td className="p-3">
@@ -63,12 +78,9 @@ export function TeacherTable({ onEdit, onDelete }: Props) {
               </td>
 
               <td className="p-2">
-                <a
-                  href={`/teachers/${item.id}`}
-                  className="text-blue-500 hover:underline"
-                >
-                  Detail
-                </a>
+                <button onClick={() => navigate(`/students/${item.id}`)}>
+                  <img src={eyeIcon} className="w-5" />
+                </button>
               </td>
 
               <td className="p-2 text-center flex gap-2 justify-center">

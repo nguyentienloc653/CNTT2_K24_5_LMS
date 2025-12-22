@@ -7,6 +7,8 @@ import { fetchTeachers } from "../../redux/slices/teacherSlice";
 
 import trashIcon from "../../assets/icon/trash.png";
 import eyeIcon from "../../assets/icon/eye.png";
+import AddStudentToClassModal from "../../components/classes/AddStudentToClassModal";
+import AddTeacherToClassModal from "../../components/classes/AddTeacherToClassModal";
 
 type ViewMode = "students" | "teachers";
 
@@ -20,6 +22,8 @@ export default function ClassDetail() {
   const teachers = useAppSelector((s) => s.teachers.list);
 
   const [viewMode, setViewMode] = useState<ViewMode>("students");
+  const [openStudentModal, setOpenStudentModal] = useState(false);
+  const [openTeacherModal, setOpenTeacherModal] = useState(false);
 
   useEffect(() => {
     if (classes.length === 0) dispatch(fetchClasses());
@@ -49,9 +53,7 @@ export default function ClassDetail() {
           <h1 className="text-2xl font-bold">
             {viewMode === "students" ? "Students" : "Teachers"}
           </h1>
-          <p className="text-gray-500">
-            Class: {classData.name}
-          </p>
+          <p className="text-gray-500">Class: {classData.name}</p>
         </div>
 
         <button
@@ -63,7 +65,7 @@ export default function ClassDetail() {
       </div>
 
       {/* ================= TAB ================= */}
-      <div className="flex gap-6 mb-6">
+      <div className="flex gap-6 mb-6 bg-white p-4 rounded-md">
         <button
           onClick={() => setViewMode("students")}
           className={`font-medium pb-2 ${
@@ -104,7 +106,14 @@ export default function ClassDetail() {
           <option>Sắp xếp</option>
         </select>
 
-        <button className="bg-orange-500 text-white px-4 py-2 rounded-lg">
+        <button
+          onClick={() =>
+            viewMode === "students"
+              ? setOpenStudentModal(true)
+              : setOpenTeacherModal(true)
+          }
+          className="bg-orange-500 text-white px-4 py-2 rounded-lg"
+        >
           + Add {viewMode === "students" ? "Student" : "Teacher"}
         </button>
       </div>
@@ -118,30 +127,22 @@ export default function ClassDetail() {
                 <th className="p-3 text-left">Mã SV</th>
                 <th className="p-3 text-left">Tên sinh viên</th>
                 <th className="p-3 text-left">Email</th>
-                <th className="p-3 text-center">View</th>
                 <th className="p-3 text-center">Thao tác</th>
               </tr>
             </thead>
 
             <tbody>
               {classStudents.map((item) => (
-                <tr
-                  key={item.id}
-                  className="border-b hover:bg-gray-50"
-                >
+                <tr key={item.id} className="border-b hover:bg-gray-50">
                   <td className="p-3">{item.studentCode}</td>
                   <td className="p-3">{item.name}</td>
                   <td className="p-3">{item.email}</td>
 
-                  <td className="p-3 text-center">
-                    <button
-                      onClick={() => navigate(`/students/${item.id}`)}
-                    >
+                  <td className="p-3 text-center flex justify-center gap-3">
+                    <button onClick={() => navigate(`/students/${item.id}`)}>
                       <img src={eyeIcon} className="w-5 mx-auto" />
                     </button>
-                  </td>
 
-                  <td className="p-3 text-center flex justify-center gap-3">
                     <button>
                       <img src={trashIcon} className="w-5" />
                     </button>
@@ -161,30 +162,22 @@ export default function ClassDetail() {
                 <th className="p-3 text-left">Mã GV</th>
                 <th className="p-3 text-left">Tên giáo viên</th>
                 <th className="p-3 text-left">Môn</th>
-                <th className="p-3 text-center">View</th>
                 <th className="p-3 text-center">Thao tác</th>
               </tr>
             </thead>
 
             <tbody>
               {classTeachers.map((item) => (
-                <tr
-                  key={item.id}
-                  className="border-b hover:bg-gray-50"
-                >
+                <tr key={item.id} className="border-b hover:bg-gray-50">
                   <td className="p-3">{item.teacherCode}</td>
                   <td className="p-3">{item.name}</td>
                   <td className="p-3">{item.subject}</td>
 
-                  <td className="p-3 text-center">
-                    <button
-                      onClick={() => navigate(`/teachers/${item.id}`)}
-                    >
+                  <td className="p-3 text-center flex justify-center gap-3">
+                    <button onClick={() => navigate(`/teachers/${item.id}`)}>
                       <img src={eyeIcon} className="w-5 mx-auto" />
                     </button>
-                  </td>
 
-                  <td className="p-3 text-center flex justify-center gap-3">
                     <button>
                       <img src={trashIcon} className="w-5" />
                     </button>
@@ -195,6 +188,20 @@ export default function ClassDetail() {
           </table>
         </div>
       )}
+
+      <AddStudentToClassModal
+        open={openStudentModal}
+        onClose={() => setOpenStudentModal(false)}
+        classId={classData.id}
+        students={students}
+      />
+
+      <AddTeacherToClassModal
+        open={openTeacherModal}
+        onClose={() => setOpenTeacherModal(false)}
+        classId={classData.id}
+        teachers={teachers}
+      />
     </div>
   );
 }

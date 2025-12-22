@@ -15,7 +15,7 @@
       "studentCode": "SV002",
       "name": "Linh",
       "birthday": "2006-11-23",
-      "classId": "1",
+      "classId": "2",
       "gender": "Nữ",
       "address": "hdadna",
       "email": "dnha@gmail.com",
@@ -26,7 +26,7 @@
       "studentCode": "SV003",
       "name": "Huy",
       "birthday": "2006-11-12",
-      "classId": "2",
+      "classId": "1",
       "gender": "Nam",
       "address": "dâda",
       "email": "đâgbc@gmail.com",
@@ -37,7 +37,7 @@
       "studentCode": "SV004",
       "name": "dnaja",
       "birthday": "2000-03-08",
-      "classId": "2",
+      "classId": "1",
       "gender": "Nam",
       "address": "dbhad",
       "email": "bhad@gmail.com",
@@ -57,9 +57,42 @@
       "subject": "React",
       "status": "active",
       "classIds": [
-        1
+        1,
+        2
       ],
       "id": 1
+    },
+    {
+      "teacherCode": "GV002",
+      "name": "dàca",
+      "gender": "Nam",
+      "birthday": "2000-12-21",
+      "email": "dhbada@gmail.com",
+      "phone": "948198419",
+      "address": "dâd",
+      "subject": "dâc",
+      "status": "active",
+      "classIds": [
+        2,
+        1
+      ],
+      "id": 2
+    },
+    {
+      "teacherCode": "GV003",
+      "name": "đâ",
+      "gender": "Nam",
+      "birthday": "1111-02-11",
+      "email": "dqd@gmail.com",
+      "phone": "4814118418",
+      "address": "ncfahd",
+      "subject": "nada",
+      "status": "active",
+      "classIds": [
+        1,
+        2
+      ],
+      "id": 3
     }
   ],
   "classes": [

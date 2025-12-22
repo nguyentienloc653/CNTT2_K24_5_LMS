@@ -3,9 +3,11 @@ import { fetchTeachers } from "../../redux/slices/teacherSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import editIcon from "../../assets/icon/edit.png";
 import trashIcon from "../../assets/icon/trash.png";
+import eyeIcon from "../../assets/icon/eye.png";
 import { fetchClasses } from "../../redux/slices/classesSlice";
 import type { Class } from "../../redux/types/class";
 import { fetchStudents } from "../../redux/slices/studentSlice";
+import { useNavigate } from "react-router-dom";
 type Props = {
   onEdit: (classData: Class) => void;
   onDelete: (classData: Class) => void;
@@ -15,6 +17,7 @@ export function ClassTable({ onEdit, onDelete }: Props) {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.teachers);
   const classes = useAppSelector((state) => state.classes.list);
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchTeachers());
@@ -32,7 +35,6 @@ export function ClassTable({ onEdit, onDelete }: Props) {
             <th className="p-2">Mã lớp</th>
             <th className="p-2">Tên lớp</th>
             <th className="p-2">Trạng thái</th>
-            <th className="p-2">View</th>
             <th className="p-2 text-center">Thao tác</th>
           </tr>
         </thead>
@@ -54,16 +56,12 @@ export function ClassTable({ onEdit, onDelete }: Props) {
                 </span>
               </td>
 
-              <td className="p-2">
-                <a
-                  href={`/classes/${item.id}`}
-                  className="text-blue-500 hover:underline"
-                >
-                  Detail
-                </a>
-              </td>
-
               <td className="p-2 text-center flex gap-2 justify-center">
+                {/* VIEW */}
+                <button onClick={() => navigate(`/classes/${item.id}`)}>
+                  <img src={eyeIcon} className="w-5 mx-auto" />
+                </button>
+
                 {/* EDIT */}
                 <button onClick={() => onEdit(item)}>
                   <img src={editIcon} alt="Edit" className="w-6" />
