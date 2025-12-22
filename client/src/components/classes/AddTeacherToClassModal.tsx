@@ -1,6 +1,7 @@
 import type { Teacher } from "../../redux/types/teacher";
 import { useAppDispatch } from "../../redux/hook";
 import { updateTeacher } from "../../redux/slices/teacherSlice";
+import { toast } from "react-toastify";
 
 type Props = {
   open: boolean;
@@ -23,17 +24,24 @@ export default function AddTeacherToClassModal({
     (t) => !t.classIds.includes(classId)
   );
 
-  const handleAdd = (teacher: Teacher) => {
-    dispatch(
-      updateTeacher({
-        id: teacher.id,
-        data: {
-          ...teacher,
-          classIds: [...teacher.classIds, classId],
-        },
-      })
-    );
-    onClose();
+  const handleAddTeacher = async (teacher: Teacher) => {
+    try {
+      await dispatch(
+        updateTeacher({
+          id: teacher.id,
+          data: {
+            ...teacher,
+            classIds: [...teacher.classIds, Number(classId)],
+          },
+        })
+      ).unwrap();
+
+      toast.success("Thêm giáo viên vào lớp thành công 🎉");
+      onClose();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast.error("Thao tác thất bại ❌");
+    }
   };
 
   return (
@@ -53,7 +61,7 @@ export default function AddTeacherToClassModal({
               </div>
 
               <button
-                onClick={() => handleAdd(t)}
+                onClick={() => handleAddTeacher(t)}
                 className="px-3 py-1 bg-orange-500 text-white rounded"
               >
                 Thêm

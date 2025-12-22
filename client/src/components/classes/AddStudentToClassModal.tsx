@@ -1,6 +1,7 @@
 import type { Student } from "../../redux/types/student";
 import { useAppDispatch } from "../../redux/hook";
 import { updateStudent } from "../../redux/slices/studentSlice";
+import { toast } from "react-toastify";
 
 type Props = {
   open: boolean;
@@ -23,14 +24,21 @@ export default function AddStudentToClassModal({
     (s) => Number(s.classId) !== classId
   );
 
-  const handleAdd = (student: Student) => {
-    dispatch(
-      updateStudent({
-        id: student.id,
-        data: { ...student, classId: String(classId) },
-      })
-    );
-    onClose();
+  const handleAdd = async (student: Student) => {
+    try {
+      await dispatch(
+        updateStudent({
+          id: student.id,
+          data: { ...student, classId: String(classId) },
+        })
+      ).unwrap();
+
+      toast.success("Thêm sinh viên vào lớp thành công 🎉");
+      onClose();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast.error("Thao tác thất bại ❌");
+    }
   };
 
   return (

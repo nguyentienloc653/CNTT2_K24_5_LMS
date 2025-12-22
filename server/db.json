@@ -19,8 +19,13 @@
     {
       "id": "11f0",
       "studentCode": "SV002",
+<<<<<<< HEAD
       "name": "ddd",
       "birthday": "2000-02-22",
+=======
+      "name": "Linh",
+      "birthday": "2006-11-23",
+>>>>>>> gia_huy
       "classId": "1",
       "gender": "Nữ",
       "address": "ds",
@@ -39,8 +44,45 @@
       "address": "dnjjdan",
       "subject": "React",
       "status": "active",
+<<<<<<< HEAD
       "classIds": [1],
       "id": "1"
+=======
+      "classIds": [
+        1
+      ],
+      "id": 1
+    },
+    {
+      "teacherCode": "GV002",
+      "name": "dàca",
+      "gender": "Nam",
+      "birthday": "2000-12-21",
+      "email": "dhbada@gmail.com",
+      "phone": "948198419",
+      "address": "dâd",
+      "subject": "dâc",
+      "status": "active",
+      "classIds": [
+        2
+      ],
+      "id": 2
+    },
+    {
+      "teacherCode": "GV003",
+      "name": "đâ",
+      "gender": "Nam",
+      "birthday": "1111-02-11",
+      "email": "dqd@gmail.com",
+      "phone": "4814118418",
+      "address": "ncfahd",
+      "subject": "nada",
+      "status": "active",
+      "classIds": [
+        1
+      ],
+      "id": 3
+>>>>>>> gia_huy
     }
   ],
   "classes": [
@@ -48,7 +90,17 @@
       "classCode": "CL001",
       "name": "CNTT1",
       "status": "active",
+<<<<<<< HEAD
       "id": "1"
+=======
+      "id": 2
+    },
+    {
+      "classCode": "CL003",
+      "name": "djacc",
+      "status": "active",
+      "id": 3
+>>>>>>> gia_huy
     }
   ],
   "subjects": [

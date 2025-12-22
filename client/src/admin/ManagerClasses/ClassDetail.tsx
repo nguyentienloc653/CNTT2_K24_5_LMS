@@ -4,6 +4,10 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { fetchClasses } from "../../redux/slices/classesSlice";
 import { fetchStudents } from "../../redux/slices/studentSlice";
 import { fetchTeachers } from "../../redux/slices/teacherSlice";
+import ConfirmModal from "../../components/common/ModalConfirm";
+import { updateStudent } from "../../redux/slices/studentSlice";
+import { updateTeacher } from "../../redux/slices/teacherSlice";
+import { toast } from "react-toastify";
 
 import trashIcon from "../../assets/icon/trash.png";
 import eyeIcon from "../../assets/icon/eye.png";
@@ -25,6 +29,15 @@ export default function ClassDetail() {
   const [openStudentModal, setOpenStudentModal] = useState(false);
   const [openTeacherModal, setOpenTeacherModal] = useState(false);
 
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [removeType, setRemoveType] = useState<"student" | "teacher" | null>(
+    null
+  );
+  const [selectedItem, setSelectedItem] = useState<any>(null);
+
+  const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState("");
+
   useEffect(() => {
     if (classes.length === 0) dispatch(fetchClasses());
     if (students.length === 0) dispatch(fetchStudents());
@@ -44,6 +57,75 @@ export default function ClassDetail() {
   const classTeachers = teachers.filter((t) =>
     t.classIds.includes(classData.id)
   );
+
+  const openRemoveModal = (type: "student" | "teacher", item: any) => {
+    setRemoveType(type);
+    setSelectedItem(item);
+    setConfirmOpen(true);
+  };
+
+  const handleConfirmRemove = async () => {
+    if (!selectedItem || !removeType) return;
+
+    try {
+      if (removeType === "student") {
+        await dispatch(
+          updateStudent({
+            id: selectedItem.id,
+            data: {
+              ...selectedItem,
+              classId: "",
+            },
+          })
+        ).unwrap();
+
+        toast.success("Xoá sinh viên khỏi lớp thành công 🎉");
+      }
+
+      if (removeType === "teacher") {
+        await dispatch(
+          updateTeacher({
+            id: selectedItem.id,
+            data: {
+              ...selectedItem,
+              classIds: selectedItem.classIds.filter(
+                (cid: number) => cid !== classData.id
+              ),
+            },
+          })
+        ).unwrap();
+
+        toast.success("Xoá giáo viên khỏi lớp thành công 🎉");
+      }
+
+      setConfirmOpen(false);
+      setSelectedItem(null);
+      setRemoveType(null);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      toast.error("Thao tác thất bại ❌");
+    }
+  };
+
+  const filteredStudents = classStudents
+    .filter((s) =>
+      `${s.name} ${s.studentCode}`.toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortBy === "name") return a.name.localeCompare(b.name);
+      if (sortBy === "code") return a.studentCode.localeCompare(b.studentCode);
+      return 0;
+    });
+
+  const filteredTeachers = classTeachers
+    .filter((t) =>
+      `${t.name} ${t.teacherCode}`.toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortBy === "name") return a.name.localeCompare(b.name);
+      if (sortBy === "code") return a.teacherCode.localeCompare(b.teacherCode);
+      return 0;
+    });
 
   return (
     <div className="p-8 bg-[#FFF7ED] min-h-screen">
@@ -92,18 +174,32 @@ export default function ClassDetail() {
       {/* ================= SEARCH BAR ================= */}
       <div className="bg-white rounded-xl p-4 mb-6 flex gap-4 items-center">
         <input
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           placeholder={`Search ${
             viewMode === "students" ? "students" : "teachers"
           }...`}
           className="flex-1 border rounded-lg px-4 py-2 outline-none"
         />
 
-        <select className="border rounded-lg px-4 py-2">
-          <option>All Classes</option>
-        </select>
+        <select
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="border rounded-lg px-4 py-2"
+        >
+          <option value="">Sắp xếp</option>
 
-        <select className="border rounded-lg px-4 py-2">
-          <option>Sắp xếp</option>
+          {viewMode === "students" ? (
+            <>
+              <option value="name">Tên</option>
+              <option value="code">Mã SV</option>
+            </>
+          ) : (
+            <>
+              <option value="name">Tên</option>
+              <option value="code">Mã GV</option>
+            </>
+          )}
         </select>
 
         <button
@@ -132,7 +228,7 @@ export default function ClassDetail() {
             </thead>
 
             <tbody>
-              {classStudents.map((item) => (
+              {filteredStudents.map((item) => (
                 <tr key={item.id} className="border-b hover:bg-gray-50">
                   <td className="p-3">{item.studentCode}</td>
                   <td className="p-3">{item.name}</td>
@@ -143,7 +239,7 @@ export default function ClassDetail() {
                       <img src={eyeIcon} className="w-5 mx-auto" />
                     </button>
 
-                    <button>
+                    <button onClick={() => openRemoveModal("student", item)}>
                       <img src={trashIcon} className="w-5" />
                     </button>
                   </td>
@@ -167,7 +263,7 @@ export default function ClassDetail() {
             </thead>
 
             <tbody>
-              {classTeachers.map((item) => (
+              {filteredTeachers.map((item) => (
                 <tr key={item.id} className="border-b hover:bg-gray-50">
                   <td className="p-3">{item.teacherCode}</td>
                   <td className="p-3">{item.name}</td>
@@ -178,7 +274,7 @@ export default function ClassDetail() {
                       <img src={eyeIcon} className="w-5 mx-auto" />
                     </button>
 
-                    <button>
+                    <button onClick={() => openRemoveModal("teacher", item)}>
                       <img src={trashIcon} className="w-5" />
                     </button>
                   </td>
@@ -201,6 +297,18 @@ export default function ClassDetail() {
         onClose={() => setOpenTeacherModal(false)}
         classId={classData.id}
         teachers={teachers}
+      />
+
+      <ConfirmModal
+        open={confirmOpen}
+        title="Xác nhận xoá"
+        description={
+          removeType === "student"
+            ? `Xoá sinh viên "${selectedItem?.name}" khỏi lớp này?`
+            : `Xoá giáo viên "${selectedItem?.name}" khỏi lớp này?`
+        }
+        onCancel={() => setConfirmOpen(false)}
+        onConfirm={handleConfirmRemove}
       />
     </div>
   );
