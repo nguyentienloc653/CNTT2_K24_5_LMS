@@ -51,7 +51,7 @@ export function TeacherTable({ data, onEdit, onDelete }: Props) {
           {data.length === 0 && (
             <tr>
               <td colSpan={6} className="p-6 text-center text-gray-400">
-                Không tìm thấy sinh viên
+                Không tìm thấy giảng viên
               </td>
             </tr>
           )}

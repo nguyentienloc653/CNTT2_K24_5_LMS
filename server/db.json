@@ -15,7 +15,7 @@
       "studentCode": "SV002",
       "name": "Linh",
       "birthday": "2006-11-23",
-      "classId": "2",
+      "classId": "1",
       "gender": "Nữ",
       "address": "hdadna",
       "email": "dnha@gmail.com",
@@ -57,8 +57,7 @@
       "subject": "React",
       "status": "active",
       "classIds": [
-        1,
-        2
+        1
       ],
       "id": 1
     },
@@ -73,8 +72,7 @@
       "subject": "dâc",
       "status": "active",
       "classIds": [
-        2,
-        1
+        2
       ],
       "id": 2
     },
@@ -89,8 +87,7 @@
       "subject": "nada",
       "status": "active",
       "classIds": [
-        1,
-        2
+        1
       ],
       "id": 3
     }
@@ -107,6 +104,12 @@
       "name": "CNTT1",
       "status": "active",
       "id": 2
+    },
+    {
+      "classCode": "CL003",
+      "name": "djacc",
+      "status": "active",
+      "id": 3
     }
   ],
   "subjects": [
