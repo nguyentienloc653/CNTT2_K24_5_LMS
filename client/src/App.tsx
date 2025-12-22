@@ -32,6 +32,7 @@ import { ToastContainer } from 'react-toastify';
 import Sidebar from './components/training-manager/Sidebar';
 import ClassManager from './admin/ManagerClasses/ClassManager';
 import ClassDetail from './admin/ManagerClasses/ClassDetail';
+import QuizApp from './components/question/QuizzApp';
 
 type PageId = 'overview' | 'scores' | 'attendance' | 'submission';
 
@@ -106,6 +107,7 @@ export default function App() {
                 <Route path="/classes" element={<ClassManager />} />
                 <Route path="/classes/:id" element={<ClassDetail />} />
                 <Route path="/statistic" element={<Statisic />} />
+                <Route path="/question_admin" element={<QuizApp />} />
             </Routes>
         </BrowserRouter>
     );
