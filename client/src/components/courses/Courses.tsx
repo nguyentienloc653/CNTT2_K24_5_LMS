@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import CourseHeader from "./CourseHeader";
+import NavbarManagerCourse from "./NavbarManagerCourse";
 import { coursesApi } from "../../redux/api/coursesApi";
+import SideBarManager from "../layout/SideBarManager";
 
 interface Course {
     id: number;
@@ -45,10 +47,14 @@ export default function Courses() {
     };
 
     return (
-        <div>
+        <div className="flex">
+            <SideBarManager />
             <div className="flex flex-col">
                 {/* HEADER */}
                 <CourseHeader onAdd={handleAdd} />
+
+                {/* NAVBAR */}
+                <NavbarManagerCourse />
 
                 {/* TABLE */}
                 {loading ? (
