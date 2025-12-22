@@ -9,14 +9,15 @@ import type { Class } from "../../redux/types/class";
 import { fetchStudents } from "../../redux/slices/studentSlice";
 import { useNavigate } from "react-router-dom";
 type Props = {
+  data: Class[];
   onEdit: (classData: Class) => void;
   onDelete: (classData: Class) => void;
 };
 
-export function ClassTable({ onEdit, onDelete }: Props) {
+export function ClassTable({ data, onEdit, onDelete }: Props) {
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector((state) => state.teachers);
-  const classes = useAppSelector((state) => state.classes.list);
+  // const classes = useAppSelector((state) => state.classes.list);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -40,7 +41,14 @@ export function ClassTable({ onEdit, onDelete }: Props) {
         </thead>
 
         <tbody>
-          {classes.map((item) => (
+          {data.length === 0 && (
+            <tr>
+              <td colSpan={6} className="p-6 text-center text-gray-400">
+                Không tìm thấy lớp
+              </td>
+            </tr>
+          )}
+          {data.map((item) => (
             <tr key={item.id} className="border-b hover:bg-gray-50">
               <td className="p-2">{item.classCode}</td>
               <td className="p-2">{item.name}</td>

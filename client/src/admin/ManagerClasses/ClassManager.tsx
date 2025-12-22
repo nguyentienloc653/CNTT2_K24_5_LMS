@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { deleteClass, fetchClasses } from "../../redux/slices/classesSlice";
 import ClassModalForm from "../../components/classes/ClassModalForm";
 import type { Class } from "../../redux/types/class";
 // import { toast } from "react-toastify";
 import SideBarManager from "../../components/layout/SideBarManager";
 import HeaderManagerClass from "../../components/classes/HeaderManagerClass";
-import NavbarManagerStudent from "../../components/classes/NavbarManagerClass";
 import { ClassTable } from "../../components/classes/ClassTable";
 import ConfirmModal from "../../components/common/ModalConfirm";
+import NavbarManagerClass from "../../components/classes/NavbarManagerClass";
 
 export default function ClassManager() {
   const dispatch = useAppDispatch();
-  // const classes = useAppSelector((state) => state.classes.list);
+  const classes = useAppSelector((state) => state.classes.list);
 
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<"add" | "edit">("add");
+  const [search, setSearch] = useState("");
+  const [sortBy, setSortBy] = useState("");
   const [selectedClass, setSelectedClass] = useState<Class | null>(null);
   const [deleteClassTarget, setDeleteClassTarget] = useState<Class | null>(
     null
@@ -53,6 +55,17 @@ export default function ClassManager() {
     setDeleteClassTarget(null);
   };
 
+  const filteredClass = classes
+    .filter((c) =>
+      `${c.name} ${c.classCode}`.toLowerCase().includes(search.toLowerCase())
+    )
+    .sort((a, b) => {
+      if (sortBy === "name-asc") return a.name.localeCompare(b.name);
+      if (sortBy === "name-desc") return b.name.localeCompare(a.name);
+      if (sortBy === "code") return a.classCode.localeCompare(b.classCode);
+      return 0;
+    });
+
   return (
     <div className="flex min-h-screen bg-orange-50">
       {/* SIDEBAR */}
@@ -66,9 +79,14 @@ export default function ClassManager() {
         <HeaderManagerClass onAdd={handleAdd} />
 
         {/* NAVBAR */}
-        <NavbarManagerStudent />
+        <NavbarManagerClass
+          search={search}
+          onSearchChange={setSearch}
+          sort={sortBy}
+          onSortChange={setSortBy}
+        />
         {/* TABLE */}
-        <ClassTable onDelete={handleDelete} onEdit={handleEdit} />
+        <ClassTable onDelete={handleDelete} onEdit={handleEdit} data={filteredClass} />
         {/* MODAL */}
       </div>
 
