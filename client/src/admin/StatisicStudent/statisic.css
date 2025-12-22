@@ -214,7 +214,6 @@
     "Liberation Mono", "Courier New", monospace;
 }
 
-/* name cell */
 .name-cell .name {
   font-weight: 900;
   color: #0f172a;
@@ -257,7 +256,6 @@
   padding: 0 2px;
 }
 
-/* ====== SKELETON ====== */
 .stt-skeleton {
   display: grid;
   grid-template-columns: repeat(4, minmax(210px, 1fr));
@@ -333,4 +331,110 @@
   margin-top: 8px;
   font-size: 12px;
   color: rgba(15, 23, 42, 0.65);
+}
+
+.stt-link {
+  cursor: pointer;
+  user-select: none;
+}
+.stt-link:hover {
+  text-decoration: underline;
+}
+
+.rate-low {
+  background: #fee2e2 !important;
+  color: #991b1b !important;
+  border-color: #fecaca !important;
+}
+.rate-mid {
+  background: #fef3c7 !important;
+  color: #92400e !important;
+  border-color: #fde68a !important;
+}
+.rate-high {
+  background: #dcfce7 !important;
+  color: #166534 !important;
+  border-color: #bbf7d0 !important;
+}
+
+.stt-iconbtn {
+  padding: 6px 10px;
+}
+
+.stt-emptybox {
+  padding: 14px;
+  border: 1px dashed #d0d7de;
+  border-radius: 10px;
+  background: #fafbfc;
+}
+
+.stt-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.stt-modal-card {
+  width: min(860px, calc(100vw - 24px));
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+  overflow: hidden;
+}
+.stt-modal-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+.stt-modal-title {
+  font-weight: 700;
+  font-size: 16px;
+}
+.stt-modal-sub {
+  font-size: 13px;
+  opacity: 0.75;
+  margin-top: 2px;
+}
+.stt-modal-body {
+  padding: 16px;
+}
+.stt-modal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.stt-modal-section-title {
+  font-weight: 700;
+  margin: 6px 0 10px;
+}
+.stt-modal-foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 16px;
+  border-top: 1px solid #e5e7eb;
+}
+.stt-btn-primary {
+  background: #111827;
+  color: #fff;
+}
+.stt-mini-input {
+  width: 80px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid #d0d7de;
+  outline: none;
+}
+.stt-save-err {
+  margin-top: 10px;
+  color: #b91c1c;
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  padding: 10px;
+  border-radius: 10px;
 }

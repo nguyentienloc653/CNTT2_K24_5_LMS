@@ -9,10 +9,17 @@
       "address": "dbahdba",
       "email": "ddah@gmail.com",
       "subject": "React",
-      "id": 1
+      "rates": {
+        "attendance": 94,
+        "homework": 80,
+        "preparation": 98
+      },
+      "id": "1"
     },
     {
+      "id": "11f0",
       "studentCode": "SV002",
+<<<<<<< HEAD
       "name": "Linh",
       "birthday": "2006-11-23",
       "classId": "2",
@@ -43,6 +50,15 @@
       "email": "bhad@gmail.com",
       "subject": "dhbaha",
       "id": 4
+=======
+      "name": "ddd",
+      "birthday": "2000-02-22",
+      "classId": "1",
+      "gender": "Nữ",
+      "address": "ds",
+      "email": "ewqeqwd@gmail.com",
+      "subject": "cxzczx"
+>>>>>>> origin/Vuong_Linh
     }
   ],
   "teachers": [
@@ -60,6 +76,7 @@
         1,
         2
       ],
+<<<<<<< HEAD
       "id": 1
     },
     {
@@ -93,13 +110,17 @@
         2
       ],
       "id": 3
+=======
+      "id": "1"
+>>>>>>> origin/Vuong_Linh
     }
   ],
   "classes": [
     {
       "classCode": "CL001",
-      "name": "CNTT2",
+      "name": "CNTT1",
       "status": "active",
+<<<<<<< HEAD
       "id": 1
     },
     {
@@ -107,75 +128,61 @@
       "name": "CNTT1",
       "status": "active",
       "id": 2
+=======
+      "id": "1"
+>>>>>>> origin/Vuong_Linh
     }
   ],
   "subjects": [
     {
-      "id": 1,
+      "id": "1",
       "name": "HTML"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Node.js"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "React.js"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Web Frontend Fundamental"
     }
   ],
-  "studentScores": [],
-  "admins": [
+  "studentScores": [
     {
-      "id": 1,
-      "email": "admin@mankai.com",
-      "password": "admin123",
-      "fullName": "System Admin",
-      "role": "ADMIN",
-      "status": "active"
-    }
-  ],
-  "users": [
-    {
-      "id": 1,
-      "email": "a@gmail.com",
-      "password": "123456",
-      "role": "STUDENT",
+      "id": "1",
       "studentId": 1,
-      "status": "active",
-      "createdAt": "2025-01-02T08:00:00Z"
+      "subjectId": 1,
+      "hk1": 8.2,
+      "hk2": 8.6,
+      "project": 9
     },
     {
-      "id": 2,
-      "email": "huytuan@gmail.com",
-      "password": "123456",
-      "role": "STUDENT",
-      "studentId": 4,
-      "status": "active",
-      "createdAt": "2025-01-02T09:00:00Z"
-    }
-  ],
-  "teacherAccounts": [
-    {
-      "id": 1,
-      "email": "d@gmail.com",
-      "password": "123456",
-      "role": "TEACHER",
-      "teacherId": 1,
-      "status": "active",
-      "createdAt": "2025-01-03T08:00:00Z"
+      "id": "2",
+      "studentId": 1,
+      "subjectId": 2,
+      "hk1": 7.5,
+      "hk2": 7.9,
+      "project": 8.2
     },
     {
-      "id": 2,
-      "email": "e@gmail.com",
-      "password": "123456",
-      "role": "TEACHER",
-      "teacherId": 2,
-      "status": "active",
-      "createdAt": "2025-01-03T09:00:00Z"
+      "id": "3",
+      "studentId": 1,
+      "subjectId": 3,
+      "hk1": 8.8,
+      "hk2": 9.1,
+      "project": 9.3
+    },
+    {
+      "id": "4",
+      "studentId": 1,
+      "subjectId": 4,
+      "hk1": 7.9,
+      "hk2": 8.3,
+      "project": 8.5
     }
   ]
 }
