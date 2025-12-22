@@ -17,6 +17,7 @@ import profiler from "../img/profile.png";
 import iconHome from "../img/home2.png";
 import iconBook from "../img/book (1).png";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 type Course = {
   id: number;
@@ -30,45 +31,28 @@ type Course = {
 
 export default function Dashboard() {
   const navigate = useNavigate();
-  const courses: Course[] = [
-    {
-      id: 1,
-      title: "N1 CHILL CLASS",
-      subtitle: "N1 Chill Class",
-      lessons: "30 buổi",
-      teacher: "Giang Sensei",
-      image: img2,
-    },
-    {
-      id: 2,
-      title: "N2 CHILL CLASS",
-      subtitle: "N2 Chill Class",
-      lessons: "24 buổi",
-      teacher: "Giang Sensei",
-      image: img2,
-    },
-    {
-      id: 3,
-      title: "PHÁT ÂM J-VOICE",
-      subtitle: "Phát âm / J-Voice",
-      lessons: "16 buổi",
-      teacher: "Giang Sensei",
-      rating: "4.9",
-      image: img2,
-    },
-    {
-      id: 4,
-      title: "IT TALK",
-      subtitle: "IT Talk",
-      lessons: "12 buổi",
-      teacher: "Giang Sensei",
-      rating: "4.7",
-      image: img2,
-    },
-  ];
+  const [courses, setCourses] = useState<Course[]>([]);
+
+  useEffect(() => {
+    fetch("http://localhost:3001/courses")
+      .then((res) => res.json())
+      .then((data) => {
+        const mappedCourses: Course[] = data.map((c: any) => ({
+          id: c.id,
+          title: c.name,
+          subtitle: c.description,
+          lessons: `${c.credits} buổi`,
+          teacher: `Teacher ${c.teacherId}`,
+          image: img2,
+        }));
+        setCourses(mappedCourses);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <div className="homepage-home-container">
+      {/* Header */}
       <header className="homepage-header">
         <div className="homepage-header-left">
           <img
@@ -77,14 +61,13 @@ export default function Dashboard() {
             className="homepage-logo"
             onClick={() => navigate("/")}
           />
-
           <nav className="homepage-nav">
             <span className="homepage-nav-item active">
               <img
                 src={iconHome}
                 alt="Home"
                 onClick={() => navigate("/HomePage")}
-              />{" "}
+              />
               Trang chủ
             </span>
             <span
@@ -95,7 +78,6 @@ export default function Dashboard() {
             </span>
           </nav>
         </div>
-
         <div className="homepage-header-actions">
           <img src={searchIcon} alt="Search" className="homepage-icon" />
           <img
@@ -107,20 +89,20 @@ export default function Dashboard() {
         </div>
       </header>
 
+      {/* Hero / Giới thiệu */}
       <div className="homepage-tb-container">
         <div className="homepage-tb-left">
           <span className="homepage-tb-quote">“</span>
           <p className="homepage-tb-text">
             Hạnh phúc là điểm khởi đầu của giáo dục và cũng là đích đến cuối
             cùng. Giang, với <strong>hơn 10 năm kinh nghiệm</strong> giảng dạy
-            và luyện thi JLPT, mong muốn giúp học viên rút ngắn thời gian và
-            <strong> chinh phục JLPT</strong>. Hãy biến học tập thành không chỉ
+            và luyện thi JLPT, mong muốn giúp học viên rút ngắn thời gian và{" "}
+            <strong>chinh phục JLPT</strong>. Hãy biến học tập thành không chỉ
             là mục tiêu phát triển bản thân mà còn là hành trình hạnh phúc để
-            hiện thực hóa những giấc mơ..
+            hiện thực hóa những giấc mơ.
           </p>
           <span className="homepage-tb-quote right">”</span>
         </div>
-
         <div className="homepage-tb-right">
           <img
             src={imggiang}
@@ -130,9 +112,9 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Courses */}
       <div className="homepage-course-container">
         <h2 className="homepage-course-title">TẤT CẢ KHÓA HỌC</h2>
-
         <div className="homepage-course-grid">
           {courses.map((c) => (
             <div
@@ -148,7 +130,6 @@ export default function Dashboard() {
                 />
                 <span className="homepage-course-level">Beginner</span>
               </div>
-
               <div className="homepage-course-body">
                 <div className="homepage-course-info">
                   <span>
@@ -161,9 +142,7 @@ export default function Dashboard() {
                     <img src={profiler} alt="Teacher" /> {c.teacher}
                   </span>
                 </div>
-
                 <h3 className="homepage-course-subtitle">{c.subtitle}</h3>
-
                 <button className="homepage-course-btn">
                   HỌC NGAY <span>↗</span>
                 </button>
@@ -173,6 +152,7 @@ export default function Dashboard() {
         </div>
       </div>
 
+      {/* Footer */}
       <footer className="homepage-site-footer" role="contentinfo">
         <div className="homepage-footer-top">
           <img
@@ -184,7 +164,6 @@ export default function Dashboard() {
             MANKAI ACADEMY - HỌC VIỆN ĐÀO TẠO PHÁT TRIỂN TIẾNG NHẬT THỰC CHIẾN
           </h2>
         </div>
-
         <div className="homepage-footer-body">
           <div className="homepage-col contact">
             <h3 className="homepage-col-title">THÔNG TIN LIÊN HỆ</h3>
@@ -222,7 +201,6 @@ export default function Dashboard() {
               </li>
             </ul>
           </div>
-
           <div className="homepage-col social">
             <h3 className="homepage-col-title">THEO DÕI CHÚNG TÔI TẠI</h3>
             <div className="homepage-social-icons" aria-hidden>
@@ -242,7 +220,6 @@ export default function Dashboard() {
               </a>
             </div>
           </div>
-
           <div className="homepage-col quote">
             <blockquote>
               <p>
@@ -255,7 +232,6 @@ export default function Dashboard() {
             </blockquote>
           </div>
         </div>
-
         <div className="homepage-footer-bottom">
           <small>
             © 2024 By Mankai Academy - Mankai Education. All rights reserved.
