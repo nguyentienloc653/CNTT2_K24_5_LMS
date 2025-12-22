@@ -1,6 +1,6 @@
 import HeaderManagerTeacher from "../../components/teachers/HeaderManagerTeacher";
 import { TeacherTable } from "../../components/teachers/TeacherTable";
-import NavbarManagerStudent from "../../components/students/NavbarManagerStudent";
+import NavbarManagerTeacher from "../../components/teachers/NavbarManagerTeacher";
 import SideBarManager from "../../components/layout/SideBarManager";
 import { useState } from "react";
 import type { Teacher } from "../../redux/types/teacher";
@@ -58,7 +58,9 @@ export default function ManagerStudent() {
         <HeaderManagerTeacher onAdd={handleAdd} />
 
         {/* NAVBAR */}
-        <NavbarManagerStudent />
+        <div className="mt-6 mb-6">
+          <NavbarManagerTeacher />
+        </div>
 
         {/* TABLE */}
         <TeacherTable onEdit={handleEdit} onDelete={handleDelete} />

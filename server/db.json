@@ -21,6 +21,28 @@
       "email": "dnha@gmail.com",
       "subject": "react",
       "id": 2
+    },
+    {
+      "studentCode": "SV003",
+      "name": "Huy",
+      "birthday": "2006-11-12",
+      "classId": "2",
+      "gender": "Nam",
+      "address": "dâda",
+      "email": "đâgbc@gmail.com",
+      "subject": "đaca",
+      "id": 3
+    },
+    {
+      "studentCode": "SV004",
+      "name": "dnaja",
+      "birthday": "2000-03-08",
+      "classId": "2",
+      "gender": "Nam",
+      "address": "dbhad",
+      "email": "bhad@gmail.com",
+      "subject": "dhbaha",
+      "id": 4
     }
   ],
   "teachers": [
@@ -46,6 +68,12 @@
       "name": "CNTT2",
       "status": "active",
       "id": 1
+    },
+    {
+      "classCode": "CL002",
+      "name": "CNTT1",
+      "status": "active",
+      "id": 2
     }
   ],
   "subjects": [

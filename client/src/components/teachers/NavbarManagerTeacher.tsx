@@ -1,4 +1,4 @@
-export default function NavbarManagerStudent() {
+export default function NavbarManagerTeacher() {
   return (
     <div className="flex justify-between items-center bg-white p-4 rounded-md">
       <div>
