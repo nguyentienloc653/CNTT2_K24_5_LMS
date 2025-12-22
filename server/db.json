@@ -10,6 +10,17 @@
       "email": "ddah@gmail.com",
       "subject": "React",
       "id": 1
+    },
+    {
+      "studentCode": "SV002",
+      "name": "Linh",
+      "birthday": "2006-11-23",
+      "classId": "1",
+      "gender": "Nữ",
+      "address": "hdadna",
+      "email": "dnha@gmail.com",
+      "subject": "react",
+      "id": 2
     }
   ],
   "teachers": [
@@ -32,7 +43,7 @@
   "classes": [
     {
       "classCode": "CL001",
-      "name": "CNTT1",
+      "name": "CNTT2",
       "status": "active",
       "id": 1
     }
@@ -57,53 +68,53 @@
   ],
   "studentScores": [],
   "admins": [
-  {
-    "id": 1,
-    "email": "admin@mankai.com",
-    "password": "admin123",
-    "fullName": "System Admin",
-    "role": "ADMIN",
-    "status": "active"
-  }
-],
-"users": [
-  {
-    "id": 1,
-    "email": "a@gmail.com",
-    "password": "123456",
-    "role": "STUDENT",
-    "studentId": 1,
-    "status": "active",
-    "createdAt": "2025-01-02T08:00:00Z"
-  },
-  {
-    "id": 2,
-    "email": "huytuan@gmail.com",
-    "password": "123456",
-    "role": "STUDENT",
-    "studentId": 4,
-    "status": "active",
-    "createdAt": "2025-01-02T09:00:00Z"
-  }
-],
-"teacherAccounts": [
-  {
-    "id": 1,
-    "email": "d@gmail.com",
-    "password": "123456",
-    "role": "TEACHER",
-    "teacherId": 1,
-    "status": "active",
-    "createdAt": "2025-01-03T08:00:00Z"
-  },
-  {
-    "id": 2,
-    "email": "e@gmail.com",
-    "password": "123456",
-    "role": "TEACHER",
-    "teacherId": 2,
-    "status": "active",
-    "createdAt": "2025-01-03T09:00:00Z"
-  }
-]
+    {
+      "id": 1,
+      "email": "admin@mankai.com",
+      "password": "admin123",
+      "fullName": "System Admin",
+      "role": "ADMIN",
+      "status": "active"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "a@gmail.com",
+      "password": "123456",
+      "role": "STUDENT",
+      "studentId": 1,
+      "status": "active",
+      "createdAt": "2025-01-02T08:00:00Z"
+    },
+    {
+      "id": 2,
+      "email": "huytuan@gmail.com",
+      "password": "123456",
+      "role": "STUDENT",
+      "studentId": 4,
+      "status": "active",
+      "createdAt": "2025-01-02T09:00:00Z"
+    }
+  ],
+  "teacherAccounts": [
+    {
+      "id": 1,
+      "email": "d@gmail.com",
+      "password": "123456",
+      "role": "TEACHER",
+      "teacherId": 1,
+      "status": "active",
+      "createdAt": "2025-01-03T08:00:00Z"
+    },
+    {
+      "id": 2,
+      "email": "e@gmail.com",
+      "password": "123456",
+      "role": "TEACHER",
+      "teacherId": 2,
+      "status": "active",
+      "createdAt": "2025-01-03T09:00:00Z"
+    }
+  ]
 }
