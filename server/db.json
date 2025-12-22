@@ -105,5 +105,63 @@
     "status": "active",
     "createdAt": "2025-01-03T09:00:00Z"
   }
+],
+"courses": [
+  {
+    "id": 1,
+    "courseCode": "HTML001",
+    "name": "HTML Basics",
+    "description": "Learn fundamental HTML concepts",
+    "subjectId": 1,
+    "teacherId": 1,
+    "classId": 1,
+    "status": "active",
+    "startDate": "2025-01-10",
+    "endDate": "2025-03-10",
+    "credits": 3,
+    "createdAt": "2025-01-03T08:00:00Z"
+  },
+  {
+    "id": 2,
+    "courseCode": "NODE001",
+    "name": "Node.js Backend Development",
+    "description": "Master Node.js and backend development",
+    "subjectId": 2,
+    "teacherId": 1,
+    "classId": 1,
+    "status": "active",
+    "startDate": "2025-01-15",
+    "endDate": "2025-04-15",
+    "credits": 4,
+    "createdAt": "2025-01-03T09:00:00Z"
+  },
+  {
+    "id": 3,
+    "courseCode": "REACT001",
+    "name": "React.js Frontend Development",
+    "description": "Build modern web applications with React",
+    "subjectId": 3,
+    "teacherId": 1,
+    "classId": 1,
+    "status": "active",
+    "startDate": "2025-02-01",
+    "endDate": "2025-05-01",
+    "credits": 4,
+    "createdAt": "2025-01-03T10:00:00Z"
+  },
+  {
+    "id": 4,
+    "courseCode": "WEB001",
+    "name": "Web Frontend Fundamentals",
+    "description": "Complete web frontend fundamentals course",
+    "subjectId": 4,
+    "teacherId": 1,
+    "classId": 1,
+    "status": "active",
+    "startDate": "2025-01-20",
+    "endDate": "2025-05-20",
+    "credits": 5,
+    "createdAt": "2025-01-03T11:00:00Z"
+  }
 ]
 }
