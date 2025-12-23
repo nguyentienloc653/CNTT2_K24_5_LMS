@@ -91,7 +91,7 @@ export default function Dashboard() {
           </p>
         </div>
 
-        <div className="dashboard-card">
+        <div className="dashboard-card" onClick={() => navigate("/overview")}>
           <div className="dashboard-card-icon">
             <img src={logoTrain} alt="Quản lý đào tạo" />
           </div>
