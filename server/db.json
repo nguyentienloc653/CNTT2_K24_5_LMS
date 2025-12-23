@@ -23,7 +23,9 @@
       "address": "dnjjdan",
       "subject": "React",
       "status": "active",
-      "classIds": [1],
+      "classIds": [
+        1
+      ],
       "id": 1
     },
     {
@@ -37,7 +39,8 @@
       "subject": "dâc",
       "status": "active",
       "classIds": [
-        2
+        2,
+        1
       ],
       "id": 2
     },
@@ -78,6 +81,12 @@
       "name": "CNTT1",
       "status": "active",
       "id": 1
+    },
+    {
+      "classCode": "CL002",
+      "name": "hjdaijd",
+      "status": "active",
+      "id": 2
     }
   ],
   "subjects": [
