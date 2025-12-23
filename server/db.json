@@ -9,7 +9,23 @@
       "address": "dbahdba",
       "email": "ddah@gmail.com",
       "subject": "React",
-      "id": 1
+      "id": 1,
+      "rates": {
+        "attendance": 95,
+        "homework": 80,
+        "preparation": 98
+      }
+    },
+    {
+      "id": "11f0",
+      "studentCode": "SV002",
+      "name": "ddd",
+      "birthday": "2000-02-22",
+      "classId": "1",
+      "gender": "Nữ",
+      "address": "ds",
+      "email": "ewqeqwd@gmail.com",
+      "subject": "cxzczx"
     }
   ],
   "teachers": [
