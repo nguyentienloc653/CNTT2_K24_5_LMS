@@ -23,9 +23,7 @@
       "address": "dnjjdan",
       "subject": "React",
       "status": "active",
-      "classIds": [
-        1
-      ],
+      "classIds": [1],
       "id": 1
     },
     {
@@ -38,10 +36,7 @@
       "address": "dâd",
       "subject": "dâc",
       "status": "active",
-      "classIds": [
-        2,
-        1
-      ],
+      "classIds": [2, 1],
       "id": 2
     },
     {
@@ -54,9 +49,7 @@
       "address": "ncfahd",
       "subject": "nada",
       "status": "active",
-      "classIds": [
-        1
-      ],
+      "classIds": [1],
       "id": 3
     },
     {
@@ -69,9 +62,7 @@
       "address": "fbajfkqah",
       "subject": "C++",
       "status": "active",
-      "classIds": [
-        3
-      ],
+      "classIds": [3],
       "id": 4
     }
   ],
@@ -216,5 +207,121 @@
       "createdAt": "2025-01-03T11:00:00Z"
     }
   ],
-  "course": []
+  "questions": [
+    {
+      "id": 1,
+      "question": "HTML là gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngôn ngữ lập trình"
+        },
+        {
+          "id": "B",
+          "text": "Ngôn ngữ đánh dấu"
+        },
+        {
+          "id": "C",
+          "text": "Framework"
+        },
+        {
+          "id": "D",
+          "text": "Cơ sở dữ liệu"
+        }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 2,
+      "question": "CSS dùng để làm gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xử lý logic"
+        },
+        {
+          "id": "B",
+          "text": "Kết nối database"
+        },
+        {
+          "id": "C",
+          "text": "Trang trí giao diện"
+        },
+        {
+          "id": "D",
+          "text": "Viết API"
+        }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": 3,
+      "question": "JavaScript là gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngôn ngữ đánh dấu"
+        },
+        {
+          "id": "B",
+          "text": "Ngôn ngữ lập trình"
+        },
+        {
+          "id": "C",
+          "text": "Framework"
+        },
+        {
+          "id": "D",
+          "text": "Hệ quản trị CSDL"
+        }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 4,
+      "question": "React là gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Framework backend"
+        },
+        {
+          "id": "B",
+          "text": "Thư viện UI của JavaScript"
+        },
+        {
+          "id": "C",
+          "text": "Ngôn ngữ lập trình"
+        },
+        {
+          "id": "D",
+          "text": "Hệ quản trị CSDL"
+        }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 5,
+      "question": "Hook nào dùng để quản lý state trong React?",
+      "options": [
+        {
+          "id": "A",
+          "text": "useEffect"
+        },
+        {
+          "id": "B",
+          "text": "useContext"
+        },
+        {
+          "id": "C",
+          "text": "useState"
+        },
+        {
+          "id": "D",
+          "text": "useRef"
+        }
+      ],
+      "correct": "C"
+    }
+  ]
 }
