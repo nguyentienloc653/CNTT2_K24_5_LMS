@@ -14,6 +14,7 @@ import logoutIcon from "../../img/logout.png";
 import dobIcon from "../../img/calendar-2.png";
 import emailIcon from "../../img/sms.png";
 import phoneIcon from "../../img/call.png";
+import { useNavigate } from "react-router-dom";
 
 type PageId = "overview" | "scores" | "attendance" | "submission";
 
@@ -35,11 +36,12 @@ function Sidebar({ activePage, onChangePage }: SidebarProps) {
     { id: "attendance", label: "Điểm danh", icon: attendanceIcon },
     { id: "submission", label: "Nộp bài", icon: submissionIcon },
   ];
+  const navigate = useNavigate();
 
   return (
     <aside className="sidebar">
       <div className="logo">
-        <img src={LogoImg} alt="RKEI Edu" className="logo-img" />
+        <img src={LogoImg} alt="RKEI Edu" className="logo-img cursor-pointer" onClick={() => navigate("/")}/>
       </div>
 
       {/* MENU */}
