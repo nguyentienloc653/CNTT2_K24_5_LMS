@@ -1,4 +1,8 @@
 import "./Article.css";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Pagination from "../pagination/pagination";
+
 import logo from "../img/mankailogo.png";
 import searchIcon from "../img/search-normal.png";
 import avatarImg from "../img/Avatar.png";
@@ -14,24 +18,36 @@ import iconBook from "../img/book (1).png";
 import clock from "../img/clock2.png";
 import iconBook2 from "../img/book2.png";
 import banner from "../img/back ground.png";
-import { useNavigate } from "react-router-dom";
 
 export default function Article() {
   const navigate = useNavigate();
-  const blogs = Array.from({ length: 9 }, (_, i) => ({
+
+  // ===== Pagination =====
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const itemsPerPage = 6;
+  const totalItems = 30;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+  // ===== Fake data =====
+  const blogs = Array.from({ length: totalItems }, (_, i) => ({
     id: i + 1,
     category: "Front-End",
     title: "Authentication & Authorization trong ReactJS",
     description:
       "Chào bạn! Nếu bạn đã làm việc với React, chắc hẳn bạn đã biết tới Dev Mode...",
-    time: "15-17 phút đọc",
+    time: "15–17 phút đọc",
     views: "8 tháng trước",
     image:
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=800",
   }));
 
+  // ===== Paginated data =====
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentBlogs = blogs.slice(startIndex, startIndex + itemsPerPage);
+
   return (
     <div className="article-home-container">
+      {/* ===== HEADER ===== */}
       <header className="article-header">
         <div className="article-header-left">
           <img
@@ -40,6 +56,7 @@ export default function Article() {
             className="article-logo"
             onClick={() => navigate("/")}
           />
+
           <nav className="article-nav">
             <span
               className="article-nav-item active"
@@ -60,6 +77,7 @@ export default function Article() {
         </div>
       </header>
 
+      {/* ===== PAGE ===== */}
       <div className="article-blog-page">
         <div className="article-blog-banner">
           <img src={banner} alt="Banner" />
@@ -70,128 +88,93 @@ export default function Article() {
         <div className="article-blog-container">
           <div className="article-blog-header">
             <h3>
-              Tất cả bài viết <span>(120)</span>
+              Tất cả bài viết <span>({totalItems})</span>
             </h3>
             <select>
-              <option>Sắp xếp: Front-End</option>
+              <option>Front-End</option>
               <option>Back-End</option>
             </select>
           </div>
+
           <hr />
 
+          {/* ===== BLOG GRID ===== */}
           <div className="article-blog-grid">
-            {blogs.map((item) => (
+            {currentBlogs.map((item) => (
               <div
-                className="article-blog-card"
                 key={item.id}
+                className="article-blog-card"
                 onClick={() => navigate("/ArticleDetails")}
               >
                 <img src={item.image} alt={item.title} />
+
                 <div className="article-blog-card-content">
                   <span className="article-tag">{item.category}</span>
                   <h4>{item.title}</h4>
                   <p>{item.description}</p>
+
                   <div className="article-blog-meta">
                     <span className="article-meta-item">
-                      <img
-                        src={clock}
-                        alt="Views"
-                        className="article-meta-icon"
-                      />{" "}
-                      {item.views}
+                      <img src={clock} alt="" /> {item.views}
                     </span>
                     <span className="article-meta-item">
-                      <img
-                        src={iconBook2}
-                        alt="Reading time"
-                        className="article-meta-icon"
-                      />{" "}
-                      {item.time}
+                      <img src={iconBook2} alt="" /> {item.time}
                     </span>
                   </div>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* ===== PAGINATION ===== */}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </div>
       </div>
 
-      <footer className="article-site-footer" role="contentinfo">
+      {/* ===== FOOTER ===== */}
+      <footer className="article-site-footer">
         <div className="article-footer-top">
-          <img
-            src={makailogo}
-            alt="Mankai Academy logo"
-            className="article-footer-logo"
-          />
-          <h2 className="article-footer-title">
+          <img src={makailogo} alt="Mankai Academy" />
+          <h2>
             MANKAI ACADEMY - HỌC VIỆN ĐÀO TẠO PHÁT TRIỂN TIẾNG NHẬT THỰC CHIẾN
           </h2>
         </div>
 
         <div className="article-footer-body">
           <div className="article-col contact">
-            <h3 className="article-col-title">THÔNG TIN LIÊN HỆ</h3>
-            <ul className="article-contact-list">
+            <h3>THÔNG TIN LIÊN HỆ</h3>
+            <ul>
               <li>
-                <img src={iconAddress} alt="Address" className="article-icon" />
-                <div>
-                  <strong>Địa chỉ:</strong>
-                  <div>
-                    Tòa Sông Đà, Đường Phạm Hùng, Mỹ Đình, Nam Từ Liêm, Hà Nội
-                  </div>
-                </div>
+                <img src={iconAddress} alt="" /> Hà Nội
               </li>
               <li>
-                <img src={iconHotline} alt="Hotline" className="article-icon" />
-                <div>
-                  <strong>Hotline:</strong>
-                  <div>0835 662 538</div>
-                </div>
+                <img src={iconHotline} alt="" /> 0835 662 538
               </li>
               <li>
-                <img src={iconEmail} alt="Email" className="article-icon" />
-                <div>
-                  <strong>Email:</strong>
-                  <div>support@mankai.edu.vn</div>
-                </div>
+                <img src={iconEmail} alt="" /> support@mankai.edu.vn
               </li>
             </ul>
           </div>
 
           <div className="article-col social">
-            <h3 className="article-col-title">THEO DÕI CHÚNG TÔI TẠI</h3>
-            <div className="article-social-icons" aria-hidden>
-              <a href="#" className="article-social-btn" aria-label="Facebook">
-                <img src={iconfacebook} alt="Facebook" />
-              </a>
-              <a
-                href="https://www.youtube.com/@RikkeiEducation"
-                className="article-social-btn"
-                aria-label="Youtube"
-              >
-                <img src={iconyoutube} alt="Youtube" />
-              </a>
-            </div>
+            <h3>THEO DÕI</h3>
+            <img src={iconfacebook} alt="Facebook" />
+            <img src={iconyoutube} alt="Youtube" />
           </div>
 
           <div className="article-col quote">
             <blockquote>
-              <p>
-                “Hạnh phúc là điểm khởi đầu của giáo dục và cũng là đích đến
-                cuối cùng. Giảng viên chúng tôi tâm niệm rằng giảng dạy và luyện
-                thi JLPT, mảng ngôn ngữ phối hợp với phát triển kỹ năng giúp học
-                viên phát triển toàn diện.”
-              </p>
-              <cite>— Anh Nguyễn Việt Lâm — CEO Mankai Academy</cite>
+              “Hạnh phúc là điểm khởi đầu của giáo dục và cũng là đích đến cuối
+              cùng.”
             </blockquote>
           </div>
         </div>
 
-        <div className="article-footer-bottom">
-          <small>
-            © 2024 By Mankai Academy - Mankai Education. All rights reserved.
-          </small>
-        </div>
+        <div className="article-footer-bottom">© 2024 By Mankai Academy</div>
       </footer>
     </div>
   );

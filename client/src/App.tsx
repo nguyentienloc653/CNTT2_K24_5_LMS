@@ -33,8 +33,10 @@ import Sidebar from "./components/training-manager/Sidebar";
 import ClassManager from "./admin/ManagerClasses/ClassManager";
 import ClassDetail from "./admin/ManagerClasses/ClassDetail";
 import TeacherDetail from "./admin/ManagerTeacher/TeacherDetail";
-import QuizApp from "./components/question/QuizzApp";
 import Courses from "./components/courses/Courses";
+import QuizzApp from "./admin/question/QuizzApp";
+import QuestionStudent from "./admin/question/QuestionStudent";
+
 type PageId = "overview" | "scores" | "attendance" | "submission";
 
 /* ===== Layout có Sidebar ===== */
@@ -100,11 +102,12 @@ export default function App() {
         <Route path="/students/:id" element={<StudentDetail />} />
         <Route path="/teachers" element={<ManagerTeacher />} />
         <Route path="/teachers/:id" element={<TeacherDetail />} />
+        <Route path="/courses" element={<Courses />} />
         <Route path="/classes" element={<ClassManager />} />
         <Route path="/classes/:id" element={<ClassDetail />} />
         <Route path="/statistic" element={<Statisic />} />
-        <Route path="/question_admin" element={<QuizApp />} />
-        <Route path="/courses" element={<Courses />} />
+        <Route path="/questions" element={<QuizzApp />} />
+        <Route path="/quizz" element={<QuestionStudent />} />
       </Routes>
     </BrowserRouter>
   );
