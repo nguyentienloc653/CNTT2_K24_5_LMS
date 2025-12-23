@@ -5,17 +5,26 @@ import NavbarManagerStudent from "../../components/students/NavbarManagerStudent
 import { StudentTable } from "../../components/students/StudentTable";
 import StudentModalForm from "../../components/students/StudentModalForm";
 import { deleteStudent } from "../../redux/slices/studentSlice";
-import { useAppDispatch } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import ModalConfirm from "../../components/common/ModalConfirm";
 import type { Student } from "../../redux/types/student";
+import Pagination from "../../components/common/Pagination";
 
 export default function ManagerStudent() {
   // ===== MODAL STATE =====
   const [open, setOpen] = useState(false);
   const [mode, setMode] = useState<"add" | "edit">("add");
+  const [search, setSearch] = useState("");
+  const [classFilter, setClassFilter] = useState("");
+  const [sort, setSort] = useState("");
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
-  const [deleteStudentTarget, setDeleteStudentTarget] = useState<Student | null>(null);
+  const [deleteStudentTarget, setDeleteStudentTarget] =
+    useState<Student | null>(null);
+  const students = useAppSelector((state) => state.students.list);
+  const classes = useAppSelector((state) => state.classes.list);
   const dispatch = useAppDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 3;
 
   // ===== HANDLERS =====
   const handleAdd = () => {
@@ -46,6 +55,35 @@ export default function ManagerStudent() {
     setSelectedStudent(null);
   };
 
+  const filteredStudents = students
+    .filter((s) => {
+      if (!search) return true;
+      const key = search.toLowerCase();
+      return (
+        s.name.toLowerCase().includes(key) ||
+        s.studentCode.toLowerCase().includes(key) ||
+        s.email.toLowerCase().includes(key)
+      );
+    })
+    .filter((s) => {
+      if (!classFilter) return true;
+      return String(s.classId) === classFilter;
+    })
+    .sort((a, b) => {
+      if (sort === "name-asc") return a.name.localeCompare(b.name);
+      if (sort === "name-desc") return b.name.localeCompare(a.name);
+      if (sort === "code") return a.studentCode.localeCompare(b.studentCode);
+      return 0;
+    });
+
+  // PAGINATION
+  const totalPage = Math.ceil(filteredStudents.length / pageSize);
+
+  const paginatedStudents = filteredStudents.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
   return (
     <div className="flex min-h-screen bg-orange-50">
       {/* SIDEBAR */}
@@ -59,10 +97,34 @@ export default function ManagerStudent() {
         <HeaderManagerStudent onAdd={handleAdd} />
 
         {/* NAVBAR */}
-        <NavbarManagerStudent />
+        <NavbarManagerStudent
+          search={search}
+          onSearchChange={(value) => {
+            setSearch(value);
+            setCurrentPage(1);
+          }}
+          classFilter={classFilter}
+          onClassChange={setClassFilter}
+          sort={sort}
+          onSortChange={(value) => {
+            setSort(value);
+            setCurrentPage(1);
+          }}
+          classes={classes}
+        />
 
         {/* TABLE */}
-        <StudentTable onEdit={handleEdit} onDelete={handleDelete} />
+        <StudentTable
+          data={paginatedStudents}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+
+        <Pagination
+          currentPage={currentPage}
+          totalPage={totalPage}
+          onPageChange={setCurrentPage}
+        />
 
         {/* MODAL */}
         <StudentModalForm
