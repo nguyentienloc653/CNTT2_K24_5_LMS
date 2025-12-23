@@ -57,53 +57,170 @@
   ],
   "studentScores": [],
   "admins": [
-  {
-    "id": 1,
-    "email": "admin@mankai.com",
-    "password": "admin123",
-    "fullName": "System Admin",
-    "role": "ADMIN",
-    "status": "active"
-  }
-],
-"users": [
-  {
-    "id": 1,
-    "email": "a@gmail.com",
-    "password": "123456",
-    "role": "STUDENT",
-    "studentId": 1,
-    "status": "active",
-    "createdAt": "2025-01-02T08:00:00Z"
-  },
-  {
-    "id": 2,
-    "email": "huytuan@gmail.com",
-    "password": "123456",
-    "role": "STUDENT",
-    "studentId": 4,
-    "status": "active",
-    "createdAt": "2025-01-02T09:00:00Z"
-  }
-],
-"teacherAccounts": [
-  {
-    "id": 1,
-    "email": "d@gmail.com",
-    "password": "123456",
-    "role": "TEACHER",
-    "teacherId": 1,
-    "status": "active",
-    "createdAt": "2025-01-03T08:00:00Z"
-  },
-  {
-    "id": 2,
-    "email": "e@gmail.com",
-    "password": "123456",
-    "role": "TEACHER",
-    "teacherId": 2,
-    "status": "active",
-    "createdAt": "2025-01-03T09:00:00Z"
-  }
-]
+    {
+      "id": 1,
+      "email": "admin@mankai.com",
+      "password": "admin123",
+      "fullName": "System Admin",
+      "role": "ADMIN",
+      "status": "active"
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "email": "a@gmail.com",
+      "password": "123456",
+      "role": "STUDENT",
+      "studentId": 1,
+      "status": "active",
+      "createdAt": "2025-01-02T08:00:00Z"
+    },
+    {
+      "id": 2,
+      "email": "huytuan@gmail.com",
+      "password": "123456",
+      "role": "STUDENT",
+      "studentId": 4,
+      "status": "active",
+      "createdAt": "2025-01-02T09:00:00Z"
+    }
+  ],
+  "teacherAccounts": [
+    {
+      "id": 1,
+      "email": "d@gmail.com",
+      "password": "123456",
+      "role": "TEACHER",
+      "teacherId": 1,
+      "status": "active",
+      "createdAt": "2025-01-03T08:00:00Z"
+    },
+    {
+      "id": 2,
+      "email": "e@gmail.com",
+      "password": "123456",
+      "role": "TEACHER",
+      "teacherId": 2,
+      "status": "active",
+      "createdAt": "2025-01-03T09:00:00Z"
+    }
+  ],
+  "questions": [
+    {
+      "id": 1,
+      "question": "HTML là gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngôn ngữ lập trình"
+        },
+        {
+          "id": "B",
+          "text": "Ngôn ngữ đánh dấu"
+        },
+        {
+          "id": "C",
+          "text": "Framework"
+        },
+        {
+          "id": "D",
+          "text": "Cơ sở dữ liệu"
+        }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 2,
+      "question": "CSS dùng để làm gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Xử lý logic"
+        },
+        {
+          "id": "B",
+          "text": "Kết nối database"
+        },
+        {
+          "id": "C",
+          "text": "Trang trí giao diện"
+        },
+        {
+          "id": "D",
+          "text": "Viết API"
+        }
+      ],
+      "correct": "C"
+    },
+    {
+      "id": 3,
+      "question": "JavaScript là gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Ngôn ngữ đánh dấu"
+        },
+        {
+          "id": "B",
+          "text": "Ngôn ngữ lập trình"
+        },
+        {
+          "id": "C",
+          "text": "Framework"
+        },
+        {
+          "id": "D",
+          "text": "Hệ quản trị CSDL"
+        }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 4,
+      "question": "React là gì?",
+      "options": [
+        {
+          "id": "A",
+          "text": "Framework backend"
+        },
+        {
+          "id": "B",
+          "text": "Thư viện UI của JavaScript"
+        },
+        {
+          "id": "C",
+          "text": "Ngôn ngữ lập trình"
+        },
+        {
+          "id": "D",
+          "text": "Hệ quản trị CSDL"
+        }
+      ],
+      "correct": "B"
+    },
+    {
+      "id": 5,
+      "question": "Hook nào dùng để quản lý state trong React?",
+      "options": [
+        {
+          "id": "A",
+          "text": "useEffect"
+        },
+        {
+          "id": "B",
+          "text": "useContext"
+        },
+        {
+          "id": "C",
+          "text": "useState"
+        },
+        {
+          "id": "D",
+          "text": "useRef"
+        }
+      ],
+      "correct": "C"
+    }
+  ]
 }
