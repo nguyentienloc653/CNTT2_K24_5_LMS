@@ -8,6 +8,7 @@ import { deleteStudent } from "../../redux/slices/studentSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import ModalConfirm from "../../components/common/ModalConfirm";
 import type { Student } from "../../redux/types/student";
+import Pagination from "../../components/common/Pagination";
 
 export default function ManagerStudent() {
   // ===== MODAL STATE =====
@@ -22,6 +23,8 @@ export default function ManagerStudent() {
   const students = useAppSelector((state) => state.students.list);
   const classes = useAppSelector((state) => state.classes.list);
   const dispatch = useAppDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 3;
 
   // ===== HANDLERS =====
   const handleAdd = () => {
@@ -73,6 +76,14 @@ export default function ManagerStudent() {
       return 0;
     });
 
+  // PAGINATION
+  const totalPage = Math.ceil(filteredStudents.length / pageSize);
+
+  const paginatedStudents = filteredStudents.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
   return (
     <div className="flex min-h-screen bg-orange-50">
       {/* SIDEBAR */}
@@ -88,16 +99,32 @@ export default function ManagerStudent() {
         {/* NAVBAR */}
         <NavbarManagerStudent
           search={search}
-          onSearchChange={setSearch}
+          onSearchChange={(value) => {
+            setSearch(value);
+            setCurrentPage(1);
+          }}
           classFilter={classFilter}
           onClassChange={setClassFilter}
           sort={sort}
-          onSortChange={setSort}
+          onSortChange={(value) => {
+            setSort(value);
+            setCurrentPage(1);
+          }}
           classes={classes}
         />
 
         {/* TABLE */}
-        <StudentTable data={filteredStudents} onEdit={handleEdit} onDelete={handleDelete} />
+        <StudentTable
+          data={paginatedStudents}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+
+        <Pagination
+          currentPage={currentPage}
+          totalPage={totalPage}
+          onPageChange={setCurrentPage}
+        />
 
         {/* MODAL */}
         <StudentModalForm

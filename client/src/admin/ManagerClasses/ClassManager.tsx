@@ -9,6 +9,7 @@ import HeaderManagerClass from "../../components/classes/HeaderManagerClass";
 import { ClassTable } from "../../components/classes/ClassTable";
 import ConfirmModal from "../../components/common/ModalConfirm";
 import NavbarManagerClass from "../../components/classes/NavbarManagerClass";
+import Pagination from "../../components/common/Pagination";
 
 export default function ClassManager() {
   const dispatch = useAppDispatch();
@@ -22,6 +23,8 @@ export default function ClassManager() {
   const [deleteClassTarget, setDeleteClassTarget] = useState<Class | null>(
     null
   );
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 2;
 
   useEffect(() => {
     dispatch(fetchClasses());
@@ -66,6 +69,14 @@ export default function ClassManager() {
       return 0;
     });
 
+  // PAGINATION
+  const totalPage = Math.ceil(filteredClass.length / pageSize);
+
+  const paginatedClass = filteredClass.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
   return (
     <div className="flex min-h-screen bg-orange-50">
       {/* SIDEBAR */}
@@ -81,15 +92,31 @@ export default function ClassManager() {
         {/* NAVBAR */}
         <NavbarManagerClass
           search={search}
-          onSearchChange={setSearch}
+          onSearchChange={(value) => {
+            setSearch(value);
+            setCurrentPage(1);
+          }}
           sort={sortBy}
-          onSortChange={setSortBy}
+          onSortChange={(value) => {
+            setSortBy(value);
+            setCurrentPage(1);
+          }}
         />
         {/* TABLE */}
-        <ClassTable onDelete={handleDelete} onEdit={handleEdit} data={filteredClass} />
-        {/* MODAL */}
+        <ClassTable
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+          data={paginatedClass}
+        />
+
+        <Pagination
+          currentPage={currentPage}
+          totalPage={totalPage}
+          onPageChange={setCurrentPage}
+        />
       </div>
 
+      {/* MODAL */}
       <ClassModalForm
         open={open}
         mode={mode}

@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { deleteTeacher } from "../../redux/slices/teacherSlice";
 import TeacherModalForm from "../../components/teachers/TeacherModalForm";
 import ConfirmModal from "../../components/common/ModalConfirm";
+import Pagination from "../../components/common/Pagination";
 
 export default function ManagerStudent() {
   const [open, setOpen] = useState(false);
@@ -21,6 +22,8 @@ export default function ManagerStudent() {
   const classes = useAppSelector((state) => state.classes.list);
   const teachers = useAppSelector((state) => state.teachers.list);
   const dispatch = useAppDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
+  const pageSize = 3;
 
   // ===== HANDLERS =====
   const handleAdd = () => {
@@ -73,6 +76,14 @@ export default function ManagerStudent() {
       return 0;
     });
 
+  // PAGINATION
+  const totalPage = Math.ceil(filteredTeachers.length / pageSize);
+
+  const paginatedTeachers = filteredTeachers.slice(
+    (currentPage - 1) * pageSize,
+    currentPage * pageSize
+  );
+
   return (
     <div className="flex flex-row gap-6 min-h-screen bg-orange-50">
       {/* SIDEBAR */}
@@ -88,17 +99,33 @@ export default function ManagerStudent() {
         <div className="mt-6 mb-6">
           <NavbarManagerTeacher
             search={search}
-            onSearchChange={setSearch}
+            onSearchChange={(value) => {
+              setSearch(value);
+              setCurrentPage(1);
+            }}
             classFilter={classFilter}
             onClassChange={setClassFilter}
             sort={sort}
-            onSortChange={setSort}
+            onSortChange={(value) => {
+              setSort(value);
+              setCurrentPage(1);
+            }}
             classes={classes}
           />
         </div>
 
         {/* TABLE */}
-        <TeacherTable data={filteredTeachers} onEdit={handleEdit} onDelete={handleDelete} />
+        <TeacherTable
+          data={paginatedTeachers}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
+
+        <Pagination
+          currentPage={currentPage}
+          totalPage={totalPage}
+          onPageChange={setCurrentPage}
+        />
 
         {/* MODAL */}
 

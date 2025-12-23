@@ -90,6 +90,21 @@
         1
       ],
       "id": 3
+    },
+    {
+      "teacherCode": "GV000",
+      "name": "dbhda",
+      "gender": "Nam",
+      "birthday": "2000-02-11",
+      "email": "dnaj@gmail.com",
+      "phone": "58243208942",
+      "address": "fbajfkqah",
+      "subject": "C++",
+      "status": "active",
+      "classIds": [
+        3
+      ],
+      "id": 4
     }
   ],
   "classes": [
