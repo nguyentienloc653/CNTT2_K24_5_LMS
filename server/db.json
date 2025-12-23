@@ -1,6 +1,7 @@
 {
   "students": [
     {
+      "id": "1",
       "studentCode": "SV001",
       "name": "Tuan",
       "birthday": "2000-02-21",
@@ -9,23 +10,77 @@
       "address": "dbahdba",
       "email": "ddah@gmail.com",
       "subject": "React",
-      "id": 1,
       "rates": {
         "attendance": 95,
-        "homework": 80,
-        "preparation": 98
+        "homework": 83,
+        "preparation": 100
       }
     },
     {
-      "id": "11f0",
+      "id": "192e",
       "studentCode": "SV002",
-      "name": "ddd",
-      "birthday": "2000-02-22",
+      "name": "Phen Hèn",
+      "birthday": "2006-02-19",
       "classId": "1",
-      "gender": "Nữ",
-      "address": "ds",
-      "email": "ewqeqwd@gmail.com",
-      "subject": "cxzczx"
+      "gender": "Nam",
+      "address": "hà nội",
+      "email": "cacacacacaca@gmail.com",
+      "subject": "Lý",
+      "rates": {
+        "attendance": 0,
+        "homework": 0,
+        "preparation": 0
+      }
+    }
+  ],
+  "studentScores": [
+    {
+      "id": "1",
+      "studentId": 1,
+      "subjectId": 1,
+      "hk1": 8.2,
+      "hk2": 8.6,
+      "project": 9
+    },
+    {
+      "id": "2",
+      "studentId": 1,
+      "subjectId": 2,
+      "hk1": 7.5,
+      "hk2": 7.9,
+      "project": 7.2
+    },
+    {
+      "id": "d270",
+      "studentId": 0,
+      "subjectId": 1,
+      "hk1": 0,
+      "hk2": 0,
+      "project": 0
+    },
+    {
+      "id": "b708",
+      "studentId": 0,
+      "subjectId": 2,
+      "hk1": 0,
+      "hk2": 0,
+      "project": 0
+    },
+    {
+      "id": "0105",
+      "studentId": 0,
+      "subjectId": 3,
+      "hk1": 0,
+      "hk2": 0,
+      "project": 0
+    },
+    {
+      "id": "80ed",
+      "studentId": 0,
+      "subjectId": 4,
+      "hk1": 0,
+      "hk2": 0,
+      "project": 0
     }
   ],
   "teachers": [
@@ -39,8 +94,10 @@
       "address": "dnjjdan",
       "subject": "React",
       "status": "active",
-      "classIds": [1],
-      "id": 1
+      "classIds": [
+        1
+      ],
+      "id": "1"
     },
     {
       "teacherCode": "GV002",
@@ -52,8 +109,11 @@
       "address": "dâd",
       "subject": "dâc",
       "status": "active",
-      "classIds": [2, 1],
-      "id": 2
+      "classIds": [
+        2,
+        1
+      ],
+      "id": "2"
     },
     {
       "teacherCode": "GV003",
@@ -65,8 +125,10 @@
       "address": "ncfahd",
       "subject": "nada",
       "status": "active",
-      "classIds": [1],
-      "id": 3
+      "classIds": [
+        1
+      ],
+      "id": "3"
     },
     {
       "teacherCode": "GV000",
@@ -78,8 +140,10 @@
       "address": "fbajfkqah",
       "subject": "C++",
       "status": "active",
-      "classIds": [3],
-      "id": 4
+      "classIds": [
+        3
+      ],
+      "id": "4"
     }
   ],
   "classes": [
@@ -87,37 +151,36 @@
       "classCode": "CL001",
       "name": "CNTT1",
       "status": "active",
-      "id": 1
+      "id": "1"
     },
     {
       "classCode": "CL002",
       "name": "hjdaijd",
       "status": "active",
-      "id": 2
+      "id": "2"
     }
   ],
   "subjects": [
     {
-      "id": 1,
+      "id": "1",
       "name": "HTML"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Node.js"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "React.js"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Web Frontend Fundamental"
     }
   ],
-  "studentScores": [],
   "admins": [
     {
-      "id": 1,
+      "id": "1",
       "email": "admin@mankai.com",
       "password": "admin123",
       "fullName": "System Admin",
@@ -127,7 +190,7 @@
   ],
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "a@gmail.com",
       "password": "123456",
       "role": "STUDENT",
@@ -136,7 +199,7 @@
       "createdAt": "2025-01-02T08:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "huytuan@gmail.com",
       "password": "123456",
       "role": "STUDENT",
@@ -147,7 +210,7 @@
   ],
   "teacherAccounts": [
     {
-      "id": 1,
+      "id": "1",
       "email": "d@gmail.com",
       "password": "123456",
       "role": "TEACHER",
@@ -156,7 +219,7 @@
       "createdAt": "2025-01-03T08:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "e@gmail.com",
       "password": "123456",
       "role": "TEACHER",
@@ -167,7 +230,7 @@
   ],
   "courses": [
     {
-      "id": 1,
+      "id": "1",
       "courseCode": "HTML001",
       "name": "HTML Basics",
       "description": "Learn fundamental HTML concepts",
@@ -181,7 +244,7 @@
       "createdAt": "2025-01-03T08:00:00Z"
     },
     {
-      "id": 2,
+      "id": "2",
       "courseCode": "NODE001",
       "name": "Node.js Backend Development",
       "description": "Master Node.js and backend development",
@@ -195,7 +258,7 @@
       "createdAt": "2025-01-03T09:00:00Z"
     },
     {
-      "id": 3,
+      "id": "3",
       "courseCode": "REACT001",
       "name": "React.js Frontend Development",
       "description": "Build modern web applications with React",
@@ -209,7 +272,7 @@
       "createdAt": "2025-01-03T10:00:00Z"
     },
     {
-      "id": 4,
+      "id": "4",
       "courseCode": "WEB001",
       "name": "Web Frontend Fundamentals",
       "description": "Complete web frontend fundamentals course",
@@ -225,7 +288,7 @@
   ],
   "questions": [
     {
-      "id": 1,
+      "id": "1",
       "question": "HTML là gì?",
       "options": [
         {
@@ -248,7 +311,7 @@
       "correct": "B"
     },
     {
-      "id": 2,
+      "id": "2",
       "question": "CSS dùng để làm gì?",
       "options": [
         {
@@ -271,7 +334,7 @@
       "correct": "C"
     },
     {
-      "id": 3,
+      "id": "3",
       "question": "JavaScript là gì?",
       "options": [
         {
@@ -294,7 +357,7 @@
       "correct": "B"
     },
     {
-      "id": 4,
+      "id": "4",
       "question": "React là gì?",
       "options": [
         {
@@ -317,7 +380,7 @@
       "correct": "B"
     },
     {
-      "id": 5,
+      "id": "5",
       "question": "Hook nào dùng để quản lý state trong React?",
       "options": [
         {

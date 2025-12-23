@@ -6,7 +6,7 @@ type Student = {
   id: number;
   studentCode: string;
   name: string;
-  classId?: number | string; 
+  classId?: number | string;
   rates?: {
     attendance?: number;
     homework?: number;
@@ -84,7 +84,7 @@ export default function Statistic() {
   const [ratePreparation, setRatePreparation] = useState<number>(0);
 
   type EditScoreRow = {
-    id: number; 
+    id: number;
     subjectId: number;
     subjectName: string;
     hk1: number;
@@ -127,7 +127,7 @@ export default function Statistic() {
           stArr.map((x) => ({
             ...x,
             id: toNum(x.id),
-            classId: x.classId !== undefined ? toNum(x.classId) : undefined,
+            classId: x.classId !== undefined ? x.classId : undefined,
             rates: x.rates ?? { attendance: 0, homework: 0, preparation: 0 },
           })) as Student[]
         );
@@ -169,9 +169,7 @@ export default function Statistic() {
 
   const classLabelById = useMemo(() => {
     const m = new Map<number, string>();
-    for (const c of classes) {
-      m.set(c.id, c.name);
-    }
+    for (const c of classes) m.set(c.id, c.name);
     return m;
   }, [classes]);
 
@@ -179,10 +177,7 @@ export default function Statistic() {
     return classes
       .slice()
       .sort((a, b) => a.id - b.id)
-      .map((c) => ({
-        id: c.id,
-        label: c.name,
-      }));
+      .map((c) => ({ id: c.id, label: c.name }));
   }, [classes]);
 
   const scoreGroup = useMemo(() => {
@@ -222,7 +217,8 @@ export default function Statistic() {
         id: s.id,
         studentCode: s.studentCode || `SV${String(s.id).padStart(3, "0")}`,
         name: s.name || "Chưa có tên",
-        classId: typeof classIdNum === "number" && Number.isFinite(classIdNum) ? classIdNum : undefined,
+        classId:
+          typeof classIdNum === "number" && Number.isFinite(classIdNum) ? classIdNum : undefined,
         className,
 
         subjectsCount: count,
@@ -240,7 +236,8 @@ export default function Statistic() {
 
     const q = search.trim().toLowerCase();
     let filtered = mapped.filter((r) => {
-      const okSearch = !q || r.name.toLowerCase().includes(q) || r.studentCode.toLowerCase().includes(q);
+      const okSearch =
+        !q || r.name.toLowerCase().includes(q) || r.studentCode.toLowerCase().includes(q);
       const okClass = classFilter === "all" || r.classId === classFilter;
       return okSearch && okClass;
     });
@@ -299,7 +296,6 @@ export default function Statistic() {
     });
 
     mapped.sort((a, b) => a.subjectName.localeCompare(b.subjectName, "vi"));
-
     setEditScores(mapped);
     setEditOpen(true);
   };
@@ -319,11 +315,20 @@ export default function Statistic() {
       setSaveErr("");
 
       const sid = Number(editStudent.id);
+      if (!Number.isFinite(sid)) throw new Error("ID sinh viên không hợp lệ");
 
-      const patchStudentRes = await fetch(`${API_BASE}/students/${sid}`, {
-        method: "PATCH",
+      const curRes = await fetch(`${API_BASE}/students/${sid}`);
+      if (!curRes.ok) {
+        const t = await curRes.text();
+        throw new Error(`Không tìm thấy sinh viên (${curRes.status}): ${t}`);
+      }
+      const curStudent = (await curRes.json()) as Student;
+
+      const putRes = await fetch(`${API_BASE}/students/${sid}`, {
+        method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          ...curStudent,
           rates: {
             attendance: clampPercent(rateAttendance),
             homework: clampPercent(rateHomework),
@@ -331,9 +336,12 @@ export default function Statistic() {
           },
         }),
       });
-      if (!patchStudentRes.ok) throw new Error("Lưu tỉ lệ thất bại");
 
-      const patchedStudent = (await patchStudentRes.json()) as Student;
+      if (!putRes.ok) {
+        const t = await putRes.text();
+        throw new Error(`Lưu tỉ lệ thất bại (${putRes.status}): ${t}`);
+      }
+      const patchedStudent = (await putRes.json()) as Student;
 
       for (const r of editScores) {
         const res = await fetch(`${API_BASE}/studentScores/${r.id}`, {
@@ -345,7 +353,10 @@ export default function Statistic() {
             project: Number(r.project ?? 0),
           }),
         });
-        if (!res.ok) throw new Error("Lưu điểm theo môn thất bại");
+        if (!res.ok) {
+          const t = await res.text();
+          throw new Error(`Lưu điểm theo môn thất bại (${res.status}): ${t}`);
+        }
       }
 
       setStudents((prev) => prev.map((s) => (s.id === patchedStudent.id ? patchedStudent : s)));
@@ -384,7 +395,7 @@ export default function Statistic() {
     });
 
     detailRows.sort((a, b) => a.subjectName.localeCompare(b.subjectName, "vi"));
-    return { student: st, scores: detailRows };
+    return { student: st, scores: detailRows as any[] };
   }, [selectedStudentId, students, scoreGroup, subjects]);
 
   if (loading) {
@@ -605,62 +616,6 @@ export default function Statistic() {
           </div>
         </div>
 
-        {selectedDetail && (
-          <div className="stt-panel">
-            <div className="stt-panel-head">
-              <div className="stt-panel-title">
-                Chi tiết điểm theo môn — <b>{selectedDetail.student?.studentCode}</b> —{" "}
-                <b>{selectedDetail.student?.name}</b>
-              </div>
-
-              <div style={{ display: "flex", gap: 8 }}>
-                <button
-                  className="stt-btn"
-                  onClick={() => selectedDetail.student && openEditModal(selectedDetail.student.id)}
-                >
-                  Sửa điểm / tỉ lệ
-                </button>
-                <button className="stt-btn" onClick={() => setSelectedStudentId(null)}>
-                  Đóng
-                </button>
-              </div>
-            </div>
-
-            {selectedDetail.scores.length === 0 ? (
-              <div className="stt-emptybox">
-                Chưa có điểm theo môn trong <b>studentScores</b>.
-              </div>
-            ) : (
-              <div className="stt-table-wrap">
-                <table className="stt-table">
-                  <thead>
-                    <tr>
-                      <th>Môn học</th>
-                      <th className="right">HK1</th>
-                      <th className="right">HK2</th>
-                      <th className="right">Project</th>
-                      <th className="right">Tổng</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {selectedDetail.scores.map((sc) => (
-                      <tr key={sc.id}>
-                        <td className="mono">{sc.subjectName}</td>
-                        <td className="right">{fmtScore(sc.hk1)}</td>
-                        <td className="right">{fmtScore(sc.hk2)}</td>
-                        <td className="right">{fmtScore(sc.project)}</td>
-                        <td className="right">
-                          <span className="badge badge-strong">{fmtScore(sc.total)}</span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </div>
-        )}
-
         {editOpen && editStudent && (
           <div className="stt-modal">
             <div className="stt-modal-card">
@@ -720,9 +675,6 @@ export default function Statistic() {
                 {editScores.length === 0 ? (
                   <div className="stt-emptybox">
                     Sinh viên này chưa có điểm trong <b>studentScores</b>.
-                    <div style={{ marginTop: 6, opacity: 0.8 }}>
-                      (Bạn thêm dữ liệu vào db.json hoặc tạo màn thêm điểm sau.)
-                    </div>
                   </div>
                 ) : (
                   <div className="stt-table-wrap">
@@ -864,7 +816,7 @@ function clampPercent(n: number) {
 
 function rateClass(v: number) {
   const x = clampPercent(v);
-  if (x < 70) return "rate-low"; 
-  if (x < 85) return "rate-mid"; 
-  return "rate-high"; 
+  if (x < 70) return "rate-low";
+  if (x < 85) return "rate-mid";
+  return "rate-high";
 }
